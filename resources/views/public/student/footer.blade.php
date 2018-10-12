@@ -24,11 +24,13 @@
 			 	    <img src="/student/images/phone.png" alt="">
 			 	</div>
 			 	<div class="ftr-grid-right">
-			 		<p>+1234 567 9871 <span class="local">+1204 859 6598</span></p>
+
+			 		<p>+1234 567 8901 <span class="local">+1234 567 8901</span></p>
 			 	</div>
-			   <div class="clearfix"> </div>
+			   <!-- <div class="clearfix"> </div> -->
 			 </div>
-			<div class="clearfix"> </div>
+			<!-- <div class="clearfix"> </div> -->
+
 		</div>
 	</div>
 </div>

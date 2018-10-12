@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>@yield('title')</title>
+
+<title>慧盈英语教育</title>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 

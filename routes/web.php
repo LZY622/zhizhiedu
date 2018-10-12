@@ -72,4 +72,15 @@ Route::group(['middleware'=>['teacher_login'],'namespace'=>'Teacher','prefix'=>'
     Route::get('/stu_wcorrect/shenhe/{id}', 'StuWcorrectController@shenhe');
     Route::resource('/stu_wcorrect', 'StuWcorrectController');
     Route::resource('/tea_wcorrect', 'TeaWcorrectController');
+
 });
+
+
+
+// 前台
+Route::get('/login','Student\IndexController@login');
+Route::get('/signup','Student\IndexController@signup');
+Route::post('/zhuce','Student\IndexController@do_signup');
+Route::post('/do_login','Student\IndexController@do_login');
+Route::post('/loginout','Student\IndexController@loginout');
+
