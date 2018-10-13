@@ -83,4 +83,5 @@ Route::get('/signup','Student\IndexController@signup');
 Route::post('/zhuce','Student\IndexController@do_signup');
 Route::post('/do_login','Student\IndexController@do_login');
 Route::post('/loginout','Student\IndexController@loginout');
+Route::get('/sendcode','Student\IndexController@sendCode');
 

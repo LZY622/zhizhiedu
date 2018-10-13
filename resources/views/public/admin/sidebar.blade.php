@@ -76,7 +76,18 @@
                         查看老师列表
                     </a>
                 </li>
-                
+                <li class="sidebar-nav-link">
+                    <a href="/admin/tea_sclass/create">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        查看口语老师课时统计
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/admin/tea_wcorrect/create">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        查看作文批改老师篇数统计
+                    </a>
+                </li>
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">助教管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/adminuser">

@@ -11,6 +11,10 @@ use App\Model\TeaSclass;
 
 class TeaSclassController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('teacher_hasrole')->only('edit');
+    }
     /**
      * Display a listing of the resource.
      *

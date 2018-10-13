@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Teauser;
 use App\Model\Stuuser;
 use App\Model\TeaSclass;
+use App\Model\StuSclass;
+use DB;
 // use CatTree;
 
 class TeaSclassController extends Controller
@@ -59,13 +61,57 @@ class TeaSclassController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 老师课时数统计
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $res = [];
+        $rs = session('user');
+        $price = ['0'=>'STPRICE','4'=>'SPEAKPRICE','5'=>'MOCKPRICE'];
+        $today = date('Y-m-d',time());
+        $month = date('Y-m-d',time()-24*3600*14);
+        //设置区间默认范围查询
+        $range = $request->input('range')?$request->input('range'):$month.' - '.$today;
+        $range_arr = explode(' - ', $range);
+        $start = strtotime($range_arr[0]);
+        $end = strtotime($range_arr[1]);
+        // dd($end);
+        // 设置默认的下拉框信息
+        $tid = $request->input('tid')?$request->input('tid'):0;
+        $status = [2,4,5,6,7];
+        $cateid = ['0'=>'st','4'=>'cla','5'=>'mt'];
+        // 找到老师信息
+        $tea = Teauser::where('cate',2)->pluck('username','id');
+        // 筛选课表中的信息
+        foreach ($cateid as $key => $value) {
+            foreach ($status as $k => $v) {
+                $res[$value][$v] = StuSclass::where(function($query) use($request,$tid){
+                    if($tid != 0){
+                        $query->where('tid',$tid);
+                    }
+                })
+                ->where('classtime','>=',$start)
+                ->where('classtime','<=',$end+(24*3600-1))
+                ->where('cateid',$key)
+                ->where('status',$v)->groupBy('tid')->select('tid',DB::raw('count(*) as total'))
+                ->get();
+            }
+        }
+        $tea_id = StuSclass::where(function($query) use($request,$tid){
+                if($tid != 0){
+                    $query->where('tid',$tid);
+                }
+            })
+            ->where('classtime','>=',$start)
+            ->where('classtime','<=',$end+(24*3600-1))
+            ->where('status','!=','1')
+            ->where('status','!=','3')
+            ->groupBy('tid')->select('tid',DB::raw('count(*) as total'))
+            ->get();
+        // dd($tea_id);
+        return view('admin.tea_sclass.keshishu',compact('rs','request','res','tea','tea_id','range','tid','price'));
     }
 
     /**

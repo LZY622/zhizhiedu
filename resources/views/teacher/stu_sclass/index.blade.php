@@ -156,14 +156,18 @@
                                 <th>课程类型</th>
                                 <th>状态</th>
                                 <th>课程文件</th>
-                                <th>操作</th>
+                                <!-- <th>操作</th> -->
                             </tr>
                         </thead>
                         <tbody>
                         	@foreach ($res as $k => $v)
                             <tr class="gradeX">
                                 <td class="am-text-middle">{{date('Y-m-d >> H:i',$v->classtime)}}</td>
-                                <td class="am-text-middle">{{$users[$v->uid]['phone']}}</td>
+                                <td class="am-text-middle">
+                                	<button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-lg" style="font-size: 12px;" uid="{{$v->uid}}" phone="{{$users[$v->uid]['phone']}}">
+                                		{{$users[$v->uid]['phone']}}
+                                	</button>
+                                </td>
                                 <td class="am-text-middle">{{$users[$v->uid][0]->taobaoID}}</td>
                                 <td class="am-text-middle">{{$users[$v->uid][0]->qq}}</td>
                                 <td class="am-text-middle">{{$users[$v->uid][0]->mname}}</td>
@@ -213,43 +217,72 @@
 		<div class="modal-dialog modal-lg" role="document">
     		<div class="modal-content">
     			<div class="widget am-cf">
-    			<div class="widget-head am-cf">
-		            <div class="widget-title am-fl" id="con">
-		            	<!-- <span style="color:red;font-weight:900">上传成功</span> -->
-		            </div>
-		        </div>
-				<div class="widget-body am-fr">
-					<a href="" class="btn btn-info"></a>
-					<br>
-					<hr>
-					<form action="/teacher/stu_sclass/upload_update" method="post" enctype="multipart/form-data" id="file">
-						{{ csrf_field() }}
-						<div class="am-form-group am-form-file">
-							<div class="tpl-form-file-img" style="display: none;">
-                                <img src="/uploads/class_files/word.jpg" alt="" height="80px" width="80px">
-                            </div>
-                           <button type="button" class="am-btn am-btn-danger am-btn-sm">
-                                <i class="am-icon-cloud-upload"></i> 
-                                上传 / 重新上传文件
-	                        </button>
-	                        <input id="doc-form-file" name="files" type="file">
-                        </div>
-                        <input type="hidden" name="taobaoID_u" value="">
-                        <input type="hidden" name="phone_u" value="">
-                        <input type="hidden" name="tea_u" value="">
-                        <input type="hidden" name="cateid_u" value="">
-                        <input type="hidden" name="classtime_u" value="">
-                        <input type="hidden" name="cid_u" value="">
-                        <input type="hidden" name="upload_filename" value="">
-                        <button type="submit" class="am-btn am-btn-primary am-btn-sm" disabled id="upload_button">
-	                        提交
-	                    </button>
-					</form>
-					
-				</div>
+	    			<div class="widget-head am-cf">
+			            <div class="widget-title am-fl" id="con">
+			            	<!-- <span style="color:red;font-weight:900">上传成功</span> -->
+			            </div>
+			        </div>
+					<div class="widget-body am-fr">
+						<a href="" class="btn btn-info"></a>
+						<br>
+						<hr>
+						<form action="/teacher/stu_sclass/upload_update" method="post" enctype="multipart/form-data" id="file">
+							{{ csrf_field() }}
+							<div class="am-form-group am-form-file">
+								<div class="tpl-form-file-img" style="display: none;">
+	                                <img src="/uploads/class_files/word.jpg" alt="" height="80px" width="80px">
+	                            </div>
+	                           <button type="button" class="am-btn am-btn-danger am-btn-sm">
+	                                <i class="am-icon-cloud-upload"></i> 
+	                                上传 / 重新上传文件
+		                        </button>
+		                        <input id="doc-form-file" name="files" type="file">
+	                        </div>
+	                        <input type="hidden" name="taobaoID_u" value="">
+	                        <input type="hidden" name="phone_u" value="">
+	                        <input type="hidden" name="tea_u" value="">
+	                        <input type="hidden" name="cateid_u" value="">
+	                        <input type="hidden" name="classtime_u" value="">
+	                        <input type="hidden" name="cid_u" value="">
+	                        <input type="hidden" name="upload_filename" value="">
+	                        <button type="submit" class="am-btn am-btn-primary am-btn-sm" disabled id="upload_button">
+		                        提交
+		                    </button>
+						</form>
+						
+					</div>
 				</div>
 		    </div>
   		</div>
+	</div>
+	<!-- 学生已完成课程的列表 -->
+	<div class="modal fade bs-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="margin-top:100px;margin-left:300px;">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="widget am-cf">
+	    			<div class="widget-head am-cf">
+			            <div class="widget-title am-fl" id="cont">
+			            	
+			            </div>
+			        </div>
+				    <div class="widget-body am-fr">
+				    	<table class="am-table am-table-compact am-table-striped tpl-table-black " width="100%">
+				    		<thead>
+				    			<tr>
+				    				<th>课程时间</th>
+	                                <th>老师</th>
+	                                <th>课程类型</th>
+	                                <th>状态</th>			
+				    			</tr>
+				    		</thead>
+				    		<tbody id="tbody">
+				    			
+				    		</tbody>
+				    	</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 @endsection
 @section('js')
@@ -320,6 +353,29 @@
 		    		$('#con').append(span);
 		    		$('#upload_button').attr('disabled','disabled');
 		    		// span.delay(2000).remove();
+		    	}
+		    },
+		    error:function(data){
+		        
+		    }
+		});
+   	});
+   	$('button[data-target=".bs-lg"]').click(function(){
+   		$('#cont').html('学生：'+$(this).attr('phone')+' 的所有预约课时');
+   		$.ajax({
+		    type:'GET',
+		    url:'/teacher/stu_sclass',
+		    dataType:'json',
+		    data:{uid:$(this).attr('uid')},
+		    success:function(data){
+		    	if (data.status == 1) {
+		    		$('#tbody>tr').remove();
+		    		for (var i = data.con.length - 1; i >= 0; i--) {
+		    			var tr = $('<tr class="gradeX"><td class="am-text-middle">'+data.con[i].classtime+'</td><td class="am-text-middle">'+data.con[i].tid+'</td><td class="am-text-middle">'+data.con[i].cateid+'</td><td class="am-text-middle">'+data.con[i].status+'</td></tr>');
+		    			$('#tbody').append(tr);
+		    		}
+		    	}else{
+		    		location.reload();
 		    	}
 		    },
 		    error:function(data){

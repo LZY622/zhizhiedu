@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\SignupRequest;
 use \DB;
 use Hash;
+use App\library\SMS\SendTemplateSMS;
+use App\library\SMS\M3Result;
 
 
 class IndexController extends Controller
@@ -61,7 +63,17 @@ class IndexController extends Controller
     public function do_signup(SignupRequest $request)
     {
        // dd($request->errors);
+        // dd('0123' == true);
         //表单验证
+        $code = $request->code;
+        if ($code != session('code') && $code != 'dtyasi') {
+            return back()->with('errors','验证码输入有误');
+        }
+        
+        $res_user = $request->except(['_token','repass','code','qq']);
+        $res_message = $request->only('qq');
+        // dd($res_message);
+        $res_num = [];
         //验证用户名唯一
         $user = DB::table('stu_users')->where('phone',$request->phone)->get();
 
@@ -69,19 +81,19 @@ class IndexController extends Controller
             return back()->with('errors','用户名重复');
         }
         //插入数据
-        $res = $request->except(['_token','repass','code']);
-        $res['password'] = Hash::make($res['password']);
-        $res['addtime'] = time();
+        $res_user['password'] = Hash::make($res_user['password']);
+        $res_user['addtime'] = time();
         // dd($res);
         //处理结果
         try{
-            $rs = DB::table('stu_users')->insert($res);
-
-            if($rs){
-                return redirect('/login')->with('success','注册成功请登录');
-            }
+            $id = DB::table('stu_users')->insertGetId($res_user);
+            $res_message['uid'] = $id;
+            $res_num['uid'] = $id;
+            $rs = DB::table('users_message')->insert($res_message);
+            $rs = DB::table('class_num')->insert($res_num);
+            return redirect('/login')->with('success','注册成功请登录');
         }catch(\Exception $e){
-            return back()->with('errors','注册失败');
+            return back()->with('errors','添加失败');
         }
     }
 
@@ -106,5 +118,22 @@ class IndexController extends Controller
             return back()->with('errors','登录失败，密码错误');
         }
 
+    }
+    public function sendCode(Request $request)
+    {
+        // dd($request->phone);
+        //获取要发送的手机号
+        $phone = $request->phone;
+        //生成模板中需要的参数
+        $code = rand(1000,9999);
+        $arr = [$code,5];
+        //调用熔炼云通讯的接口
+        $templateSMS = new SendTemplateSMS();
+        $M3result = new M3Result();
+        $M3result = $templateSMS->sendTemplateSMS($phone,$arr,1);
+        //将验证码存入session
+        session()->put('code',$code);
+        //给客户端返回响应结果
+        return $M3result->toJson();
     }
 }

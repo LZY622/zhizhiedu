@@ -127,6 +127,7 @@
 		            @endfor
 	            </tbody>
 	        </table>
+	        <input type="hidden" value="{{$id}}" name="tid">
 	    </div>
 	</div>
 </div>

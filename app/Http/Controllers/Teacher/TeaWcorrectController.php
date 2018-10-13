@@ -9,6 +9,10 @@ use App\Model\TeaWcorrect;
 
 class TeaWcorrectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('teacher_hasrole')->only('show');
+    }
     /**
      * 查看未预约作文批改篇数列表
      *

@@ -44,7 +44,7 @@ class HasRoleMiddleware
 
          // $urs = \Route::current()->getActionName();
 
-        $uls = \Request::getRequestUri();
+        $uls = \Route::current()->getActionName();
 
         // dump($uls);
 

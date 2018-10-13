@@ -225,7 +225,7 @@
 			var bookedtime_arr = bookedtime.split('|');
 			var table_bookedtime = Number(bookedtime_arr[0])+8*60*60+Number(bookedtime_arr[1]);
 			var tid_booked = $('input[name=tid]').val();
-			// console.log(tid_booked);
+			console.log(tid_booked);
 			$.ajax({
 			    type:'GET',
 			    url:'/admin/stu_sclass/book_info',

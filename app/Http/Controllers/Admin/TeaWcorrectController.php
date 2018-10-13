@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Teauser;
 use App\Model\TeaWcorrect;
+use App\Model\StuWcorrect;
+use DB;
 
 class TeaWcorrectController extends Controller
 {
@@ -68,13 +70,43 @@ class TeaWcorrectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 查看老师篇数统计
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $rs = session('user');
+        $price = ['13'=>'TASK2PRICE','15'=>'TASK1PRICE'];
+        $today = date('Y-m-d',time());
+        $month = date('Y-m-d',time()-24*3600*14);
+        //设置区间默认范围查询
+        $range = $request->input('range')?$request->input('range'):$month.' - '.$today;
+        $range_arr = explode(' - ', $range);
+        $start = strtotime($range_arr[0]);
+        $end = strtotime($range_arr[1]);
+        // dd($end);
+        // 设置默认的下拉框信息
+        $cateid = $request->input('cateid')?$request->input('cateid'):13;
+        $tid = $request->input('tid')?$request->input('tid'):0;
+        // dd($cateid);
+        // 找到老师信息
+        $tea = Teauser::where('cate',13)->orWhere('cate',15)->pluck('username','id');
+        $tea_cate = Teauser::where('cate',13)->orWhere('cate',15)->pluck('cate','id');
+        $tea_id = Teauser::where('cate',$cateid)->pluck('id');
+        // 筛选课表中的信息
+        $res = StuWcorrect::where(function($query) use($request,$tid){
+            if($tid != 0){
+                $query->where('tid',$tid);
+            }
+        })
+        ->where('classtime','>=',$start)
+        ->where('classtime','<=',$end)
+        ->whereIn('tid',$tea_id)
+        ->where('status',5)->groupBy('tid')->select('tid',DB::raw('count(*) as total'))
+        ->get();
+        // dd($res);
+        return view('admin.tea_wcorrect.pianshu',compact('rs','request','res','tea','tea_cate','range','tid','cateid','price'));
     }
 
     /**

@@ -5,7 +5,10 @@
 <!-- Meta tag Keywords -->
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 function hideURLbar(){ window.scrollTo(0,1); } </script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+<script src="/assets/js/jquery.min.js"></script>
 <!-- Meta tag Keywords -->
 
 <!-- css files -->
@@ -14,7 +17,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //css files -->
 
 <!-- js -->
-<script type="text/javascript" src="/student/dong/js/jquery-2.1.4.min.js"></script>
+<!-- <script type="text/javascript" src="/student/dong/js/jquery-2.1.4.min.js"></script> -->
 <!-- //js -->
 
 <!-- online-fonts -->
@@ -60,7 +63,11 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                         <input placeholder="请输入手机号" name="phone" type="text" required=""><br><br>
                         <input  placeholder="请输入密码" name="password" type="password" required=""><br><br>
                         <input  placeholder="请再次输入密码" name="repass" type="password" required=""><br><br>
-
+                        <input  placeholder="请输入qq号" name="qq" type="text" required=""><br><br>
+                        <input  placeholder="请输入手机验证码" name="code" type="text"  style="width: 50%;padding-right: 0px;" required="">
+                        <button type="button" class="btn btn-info" style="width: 30%;display: inline;height: 50px;padding-left:2px" onclick="sendCode();" id="yzm">获取手机验证码</button>
+                        <label style="color:red;">* 如您不在国内请联系助教领取验证码</label>
+                        <br><br>
                         <div class="sub-w3l">
                             <div class="right-w3l">
                                 <input type="submit" value="提交">
@@ -86,5 +93,55 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
     $('.alert-success').delay(2000).fadeOut(1000);
     $('.alert-warning').delay(2000).fadeOut(1000);
-    
+    // 倒计时60s
+    var countdown = 60;
+    function settime(){
+        if(countdown == 0){
+            $('#yzm').attr('onclick','sendCode();');
+            $('#yzm').text('发送验证码');
+            countdown = 60;
+        }else{
+            $('#yzm').removeAttr('onclick','sendCode');
+            $('#yzm').text('重新发送（'+countdown+'s)');
+            countdown--;
+            setTimeout(function () {
+                settime();
+            },1000);
+        }
+    }
+    function sendCode(){
+        //获取手机号
+        var phone = $('input[name=phone]').val();
+        //判断手机号是否为空
+        if(!phone){
+            var div = '<div class="alert alert-warning" role="alert">手机号不能为空</div>';
+            $('.sub-main-w3').prepend(div);
+            $('.alert-warning').delay(2000).fadeOut(1000);
+            return;
+        }
+        settime();
+        //触发ajax，请求验证码，根据是否成功给出提示信息
+        $.ajax({
+            type:'GET',
+            url:'/sendcode',
+            dataType:'json',
+            data:{'phone':phone},
+            success:function(data){
+                if(data.status == 0){
+                    $('.sub-main-w3 div[role="alert"]').remove();
+                    var div = '<div class="alert alert-success" role="alert">'+data.message+'</div>';
+                    $('.sub-main-w3').prepend(div);
+                    $('.alert-success').delay(2000).fadeOut(1000);
+                }else{
+                    $('.sub-main-w3 div[role="alert"]').remove();
+                    var div = '<div class="alert alert-warning" role="alert">'+data.message+'</div>';
+                    $('.sub-main-w3').prepend(div);
+                    $('.alert-warning').delay(2000).fadeOut(1000);
+                }
+            },
+            error:function(data){
+                //错误信息
+            }
+        });
+    }
 </script>

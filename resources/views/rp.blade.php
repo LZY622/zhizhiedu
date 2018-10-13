@@ -192,8 +192,8 @@
 				            
 				            	@foreach($res_p as $k=>$v)
 				            	<tr>
-								<td><input type="text" value="{{$v->p_title}}" name="p_title" pid="{{$v->id}}"></td>
-								<td><input type="text" value="{{$v->p_url}}" name="p_url" pid="{{$v->id}}"></td>
+								<td style="width: 200px"><input type="text" value="{{$v->p_title}}" name="p_title" pid="{{$v->id}}"style="width: 90%"></td>
+								<td><input type="text" value="{{$v->p_url}}" name="p_url" pid="{{$v->id}}" style="width: 100%"></td>
 								<td>
 									<form action="/rp/role/deletep/{{$v->id}}" method="post" style="display: inline">
 			                    		{{csrf_field()}}

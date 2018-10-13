@@ -17,6 +17,10 @@ use CatTree;
 
 class StuSclassController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('teacher_hasrole')->only('create');
+    }
     /**
      * 在老师开关课表页面添加预约
      *
@@ -24,7 +28,24 @@ class StuSclassController extends Controller
      */
     public function index(Request $request)
     {
-        // 
+        $data = [];
+        $res = StuSclass::where('uid',$request->uid)->get();
+        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $cateid = [0=>'试听',4=>'口语课',5=>'口语模考'];
+        $status = [1=>'已预约',2=>'已完成',3=>'已取消',4=>'老师缺席',5=>'学生缺席',6=>'老师紧急取消',7=>'学生紧急取消'];
+        foreach ($res as $key => $value) {
+            $value->tid = $tea[$value->tid];
+            $value->classtime = date('Y-m-d H:i:s',$value->classtime);
+            $value->cateid = $cateid[$value->cateid];
+            $value->status = $status[$value->status];
+        }
+        if ($res) {
+            $data['status'] = 1;
+            $data['con'] = $res;
+        }else{
+            $data['status'] = 0;
+        }
+        return response()->json($data);
     }
     /**
      *  老师开关课表页面中的预约信息查询
