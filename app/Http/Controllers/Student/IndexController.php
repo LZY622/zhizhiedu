@@ -41,7 +41,7 @@ class IndexController extends Controller
      */
      public function loginout()
      {
-        // session(['user_stu'=>'']);
+        session(['user_stu'=>'']);
         return view('student.login');
      }
 
@@ -113,7 +113,7 @@ class IndexController extends Controller
             // dd(1);
             session(['user_stu'=>$rs[0]]);
             // dd($rs[0]->phone);
-            return view('student.zhu.index',compact('rs[0]'))->with('success','登陆成功');
+            return view('student.zhu.index',compact('rs'))->with('success','登陆成功');
         }else{
             return back()->with('errors','登录失败，密码错误');
         }
@@ -135,5 +135,17 @@ class IndexController extends Controller
         session()->put('code',$code);
         //给客户端返回响应结果
         return $M3result->toJson();
+    }
+
+    /**
+     *  学生修改个人信息
+     *     @param 
+     *  @return 
+     */
+     public function setuser(Request $request)
+    {
+        $rs = session('user_stu');
+        dump($rs);
+        return view('student.zhu.setuser',compact(['rs']));
     }
 }
