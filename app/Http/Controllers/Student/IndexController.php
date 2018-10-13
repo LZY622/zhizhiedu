@@ -110,10 +110,9 @@ class IndexController extends Controller
             return back()->with('errors','登录失败，用户不存在');
         }
         if(Hash::check($request->password,$rs[0]->password)){
-            // dd(1);
-            session(['user_stu'=>$rs[0]]);
-            // dd($rs[0]->phone);
-            return view('student.zhu.index',compact('rs'))->with('success','登陆成功');
+            $res = DB::table('users_message')->where('uid',$rs[0]->id)->get();
+            session(['user_stu'=>$rs[0],'user_stu_m'=>$res[0]]);
+            return redirect('/students')->with('success','登陆成功');
         }else{
             return back()->with('errors','登录失败，密码错误');
         }
@@ -147,5 +146,16 @@ class IndexController extends Controller
         $rs = session('user_stu');
         dump($rs);
         return view('student.zhu.setuser',compact(['rs']));
+    }
+    /**
+     *  跳转到学生预约主页
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+     public function student()
+    {
+        $rs = session('user_stu');
+        $res = session('user_stu_m');
+        return view('student.zhu.index',compact('rs','res'))->with('success','登陆成功');
     }
 }

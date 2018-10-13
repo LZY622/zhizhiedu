@@ -87,4 +87,5 @@ Route::get('/sendcode','Student\IndexController@sendCode');
 Route::group(['middleware'=>['student_login'],'namespace'=>'Student'],function(){
     Route::get('/setuser','IndexController@setuser');
     Route::post('/setuser','IndexController@do_setuser');
+    Route::get('/students','IndexController@student');
 });

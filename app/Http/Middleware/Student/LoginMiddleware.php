@@ -21,7 +21,7 @@ class LoginMiddleware
         }
         // $res = DB::table('stu_users')->where('id',session('user_stu')->id)->first();
         // if (is_object($res) && $res->roles == session('user_stu')->roles) {
-            return $next($request);
+        return $next($request);
         // }else{
         //     return redirect('/login')->with('errors', '请使用有效账号登录后访问');
         // }
