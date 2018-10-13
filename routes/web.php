@@ -81,4 +81,9 @@ Route::get('/login','Student\IndexController@login');
 Route::get('/signup','Student\IndexController@signup');
 Route::post('/zhuce','Student\IndexController@do_signup');
 Route::post('/do_login','Student\IndexController@do_login');
-Route::post('/loginout','Student\IndexController@loginout');
+
+Route::group(['middleware'=>['student_login'],'namespace'=>'Student'],function(){
+    Route::get('/loginout','IndexController@loginout');
+    Route::get('/setuser','IndexController@setuser');
+    Route::post('/setuser','IndexController@do_setuser');
+});
