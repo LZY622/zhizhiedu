@@ -82,10 +82,14 @@ Route::get('/login','Student\IndexController@login');
 Route::get('/signup','Student\IndexController@signup');
 Route::post('/zhuce','Student\IndexController@do_signup');
 Route::post('/do_login','Student\IndexController@do_login');
-Route::post('/loginout','Student\IndexController@loginout');
+Route::get('/loginout','Student\IndexController@loginout');
 Route::get('/sendcode','Student\IndexController@sendCode');
 Route::group(['middleware'=>['student_login'],'namespace'=>'Student'],function(){
     Route::get('/setuser','IndexController@setuser');
     Route::post('/setuser','IndexController@do_setuser');
     Route::get('/students','IndexController@student');
+});
+Route::group(['middleware'=>['student_login'],'namespace'=>'Student','prefix'=>'students'],function(){
+     Route::resource('/stu_sclass', 'StuSclassController');
+     Route::resource('/stu_wcorrect', 'StuWcorrectController');
 });

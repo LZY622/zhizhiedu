@@ -1,0 +1,21 @@
+@extends('layouts.student.studentyuyue')
+@section('title','慧盈英语教育')
+@section('page_title','雅思作文批改预约')
+@section('num_name1','小作文批改剩余篇数')
+@section('num_name2','大作文批改剩余篇数')
+@section('num1',$sw_num)
+@section('num2',$bw_num)
+@section('sidenav')
+	@include('public.student.yuyue.sidenav_correct')
+@stop
+@section('content1')
+@stop
+@section('content2')
+@stop
+@section('content3')
+@stop
+@section('content4')
+@stop
+@section('js')
+
+@stop

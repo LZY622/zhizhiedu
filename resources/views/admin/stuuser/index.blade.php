@@ -141,7 +141,7 @@
                                         <i class="am-icon-pencil"></i> Class
                                     </a>
                                 
-                                    <a href="/admin/tea_sclass/20/edit?id={{$v->id}}" class="am-btn  am-btn-default am-btn-info" style="font-size: 12px;">
+                                    <a href="/admin/tea_sclass/{{$chushi_id}}/edit?id={{$v->id}}" class="am-btn  am-btn-default am-btn-info" style="font-size: 12px;">
                                         <i class="am-icon-pencil"></i> Book
                                     </a>
 								</td>

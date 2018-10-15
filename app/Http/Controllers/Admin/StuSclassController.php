@@ -153,7 +153,7 @@ class StuSclassController extends Controller
         $tid = $request->input('tid')?$request->input('tid'):0;
         // dd($cateid);
         // 找到老师信息
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         // 筛选课表中的信息
         $res = StuSclass::where(function($query) use($request,$tid,$cateid,$status){
             $username = $request->input('username');

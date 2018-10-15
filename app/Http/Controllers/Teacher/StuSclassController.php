@@ -30,7 +30,7 @@ class StuSclassController extends Controller
     {
         $data = [];
         $res = StuSclass::where('uid',$request->uid)->get();
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         $cateid = [0=>'试听',4=>'口语课',5=>'口语模考'];
         $status = [1=>'已预约',2=>'已完成',3=>'已取消',4=>'老师缺席',5=>'学生缺席',6=>'老师紧急取消',7=>'学生紧急取消'];
         foreach ($res as $key => $value) {
@@ -103,7 +103,7 @@ class StuSclassController extends Controller
         $tid = $request->input('tid')?$request->input('tid'):session('user')->id;
         // dd($cateid);
         // 找到老师信息
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         // 筛选课表中的信息
         $res = StuSclass::where(function($query) use($request,$tid,$cateid,$status){
             $username = $request->input('username');

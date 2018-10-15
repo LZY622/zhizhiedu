@@ -9,6 +9,7 @@ use \DB;
 use Hash;
 use App\library\SMS\SendTemplateSMS;
 use App\library\SMS\M3Result;
+use App\Model\Stuuser_classnum;
 
 
 class IndexController extends Controller
@@ -20,7 +21,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $rs = session('user_stu');
+        // $rs = session('user_stu');
     	return view('student.index',compact(['rs']));
     }
 
@@ -42,7 +43,7 @@ class IndexController extends Controller
      public function loginout()
      {
         session(['user_stu'=>'']);
-        return view('student.login');
+        return redirect('/');
      }
 
     /**
@@ -156,6 +157,7 @@ class IndexController extends Controller
     {
         $rs = session('user_stu');
         $res = session('user_stu_m');
-        return view('student.zhu.index',compact('rs','res'))->with('success','登陆成功');
+        $num = Stuuser_classnum::where('uid',$rs->id)->first();
+        return view('student.zhu.index',compact('rs','res','num'))->with('success','登陆成功');
     }
 }
