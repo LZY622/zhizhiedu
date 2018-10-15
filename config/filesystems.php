@@ -63,6 +63,14 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'qiniu' => [
+            'driver'=> 'qiniu',
+            'access_key' =>env('QINIU_ACCESS_KEY'),//个人面板的秘钥管理
+            'secret_key' =>env('QINIU_SECRET_KEY'),//个人面板的秘钥管理
+            'bucket'=> env('QINIU_BUCKET'),//仓库名
+            'domain'=> env('QINIU_DOMAIN')//仓库地址 加协议 文件前面的域名
+        ],
+
     ],
 
 ];

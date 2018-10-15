@@ -7,7 +7,7 @@
 					<li><a href="/">首页</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<li><a href="">购买课程</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<li><a href="/"> <img src="/student/images/lo1.png" alt=""> </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="/login">我的外教</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<li><a href="/students">我的外教</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<li><a href="" target="_parent">关于我们</a></li>
 				</ul>
 			</div>

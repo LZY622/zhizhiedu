@@ -5,13 +5,13 @@
 
 
 
-.rg2{width:80%;margin:30px auto;height:200px;-webkit-box-shadow:0 0 10px #e3e3e8;  -moz-box-shadow:0 0 10px #e3e3e8;  box-shadow:0 0 10px #e3e3e8;padding:16px;overflow:hidden;}
-.rg2-img{width:12%;float:left;}
-.rg2-text{width:78%;float:left;padding:0 50px;}
-.rg2-text h1{color:#a2a1aa;font-size:20px;height:45px;line-height:45px;}
-.rg2-text h1 span{color:#575660;}
-.rg2-text ul{overflow:hidden;margin-top:30px;width: 100%}
-.rg2-text ul li{height:54px;float:left;width:42%;padding-left:7%;border-left:1px #d1d1d1 solid;}
-.rg2-text ul li.rg2-li1{background:url(/student/images/icon9.png) no-repeat 14px center;cursor: pointer;}
-.rg2-text ul li.rg2-li2{background:url(/student/images/icon10.png) no-repeat 14px center;border-right:1px #d1d1d1 solid;cursor: pointer;}
+.rg2{width:80%;margin:30px auto;height:200px;padding:16px;}
+.rg2-img{width:15%;float:left;}
+.rg2-text{width:75%;padding:0 30px;float:left;height: 200px;}
+.rg2-text h2{color:#a2a1aa;height:35px;line-height:35px;}
+.rg2-text h2 span{color:#575660;}
+.rg2-text ul{margin-top:30px;width: 100%}
+.rg2-text ul li{height:77px;float:left;width:38%;padding-left:70px;border-left:1px #d1d1d1 solid;}
+.rg2-text ul li.rg2-li1{background:url(/student/images/icon9.png) no-repeat 30px center;cursor: pointer;}
+.rg2-text ul li.rg2-li2{background:url(/student/images/icon10.png) no-repeat 30px center;border-right:1px #d1d1d1 solid;cursor: pointer;}
 </style>

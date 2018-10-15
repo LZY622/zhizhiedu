@@ -57,7 +57,7 @@
         
         <div class="user-nav">
 	        <div class="btns" style="margin-top: 5px">
-                <a href="/setuser" class="btn btn-outline">欢迎你, <span>{{$rs[0]->phone}}</span> </a>
+                <a href="/setuser" class="btn btn-outline">欢迎你, <span>{{$rs->phone}}</span> </a>
 	            <a href="/loginout" class="btn btn-outline">退出</a>
 	        </div>
         </div>
