@@ -34,10 +34,6 @@
                                 @section('content3')
                                 @show
                             </div>
-                            <div id="snav-content4">
-                                @section('content4')
-                                @show
-                            </div>
                         </div>
                     </div>
                     <script>

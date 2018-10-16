@@ -308,7 +308,7 @@
 						        
 						    </script>
 						    <div class="am-u-sm-9 am-u-sm-push-3">
-		                        <button type="submit" class="am-btn am-btn-primary am-btn-sm" id="submit_stu" disabled="">提交</button>
+		                        <button type="submit" class="am-btn am-btn-primary am-btn-sm" id="submit_stu" disabled>提交</button>
 		                    </div>
 						</form>
 					</div>
@@ -431,7 +431,9 @@
 		        ue.ready(function() {
 		            if (data.submited) {
 		            	$('#submit_stu').removeAttr('disabled');
+		            	ue.setEnabled();
 		            }else{
+		            	$('#submit_stu').attr('disabled','disabled');
 		            	ue.setDisabled();
 		            }
 		            ue.setContent(data.content);
@@ -439,7 +441,9 @@
 		        uee.ready(function() {
 		            if (data.submited) {
 		            	$('#submit_stu').removeAttr('disabled');
+		            	uee.setEnabled();
 		            }else{
+		            	$('#submit_stu').attr('disabled','disabled');
 		            	uee.setDisabled();
 		            }
 		            uee.setContent(data.title);

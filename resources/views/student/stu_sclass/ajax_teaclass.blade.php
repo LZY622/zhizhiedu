@@ -8,10 +8,31 @@
     }
     
 </style>
+<div id="xinxi" style="position: fixed;top: 50%;width: 60%;z-index: 100;text-align: center;" >
+    @if(session('success') || (!empty($success)))  
+    <div class="alert alert-success" role="alert">
+        {{session('success')?session('success'):$success}}  
+    </div>
+    @endif
+    @if (count($errors) > 0)
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @if(is_object($errors))
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                @else
+                    <li>{{ $errors }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
+</div>
+
 <div class="fc-toolbar">
     <div>
         <h5>选择老师：</h5>
-        <select  name="tea_name" class="sm-form-control" oldid="{{$id}}">
+        <select  name="tea_name" class="sm-form-control"  oldid="{{$id}}">
             @foreach($tea as $k=>$v)
             <option value="{{$k}}" @if($k==$id) selected @endif>
             {{$v}}
@@ -37,7 +58,7 @@
         </tr>
               
     </thead>
-    <tbody>
+    <tbody id="class_book">
         <td style="padding:0px">
             <table class="table">
                 @for ($i = 0; $i < 33; $i++)
@@ -70,7 +91,7 @@
                                 </button>
                             @else
                             <td style="padding-bottom: 0px;padding-top: 4.85px">
-                                <button class="button button-3d button-small button-rounded button-green opened" classtime="{{$date.'|'.$time}}" tea="{{$tea[$id]}}" date_date="{{date('Y-m-d',$date)}}" date_time="{{date(' H:i',$time)}}">
+                                <button class="button button-3d button-small button-rounded button-green" classtime="{{$date.'|'.$time}}" tea="{{$tea[$id]}}" date_date="{{date('Y-m-d',$date)}}" date_time="{{date(' H:i',$time)}}" date_time_end="{{date(' H:i',$time+25*60)}}">
                                     opened
                                 </button>
                             @endif
@@ -94,8 +115,15 @@
         @endfor
     </tbody>
 </table>
+<!-- 预约按钮 -->
+<div style="position: fixed;bottom: 20%;left: 50%;z-index: 20;">
+    <button class="button button-rounded button-reveal button-xlarge button-dirtygreen" data-toggle="modal" data-target=".chooseclass" id="book_one">
+        <i class="icon-book"></i>
+        <span>预&nbsp;&nbsp;&nbsp;约</span>
+    </button>
+</div>
 <div class="modal fade chooseclass" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none; padding-right: 17px;">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-ml">
         <div class="modal-body">
             <div class="modal-content">
                 <div class="modal-header">
@@ -103,71 +131,47 @@
                     <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                     data-toggle="modal" data-target=".chooseclass"
+                     <table class="table">
+                        <thead>
+                            <tr class="info">
+                                <th>时间</th>
+                                <th>
+                                    <select name="cateid" id="class_cateid">
+                                        <option value="no" selected>请选择课程类型</option>
+                                        <option value="0">口语试听(1个时段=1节)</option>
+                                        <option value="4">口语课(2个时段=1节)</option>
+                                        <option value="5">口语模考(1个时段=1节)</option>
+                                    </select>
+                                    <b style="color:red">*</b>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <script>
-    $('.alert-success').delay(2000).fadeOut(1000);
-    $('.alert-danger').delay(2000).fadeOut(1000);
+    
     $(function(){
+        $('.alert-success').delay(2000).fadeOut(1000);
+        $('.alert-danger').delay(2000).fadeOut(1000);
         // 页面刷新显示要与传来的id的值一致
         var old_id = $('select[name=tea_name]').attr('oldid');
         $('select[name=tea_name]').val(old_id);
-        // 老师下拉框的改变值的事件
-        $(document).on('change','select[name=tea_name]',function(){
-            var id = $('select[name=tea_name]').val();
-            $.ajax({
-                type:'GET',
-                url:'/students/stu_sclass',
-                dataType:'html',
-                
-                data:{"id":id},
-                success:function(data){
-                    $('#snav-content1').html('');
-                    $('#snav-content1').html(data);
-                    // 第一步：匹配加载的页面中是否含有js
-                    var regDetectJs = /<script(.|\n)*?>(.|\n|\r\n)*?<\/script>/ig;
-                    var jsContained = data.match(regDetectJs);
-                     
-                    // 第二步：如果包含js，则一段一段的取出js再加载执行
-                    if(jsContained) {
-                        // 分段取出js正则
-                        var regGetJS = /<script(.|\n)*?>((.|\n|\r\n)*)?<\/script>/im;
-                     
-                        // 按顺序分段执行js
-                        var jsNums = jsContained.length;
-                        for (var i=0; i<jsNums; i++) {
-                            var jsSection = jsContained[i].match(regGetJS);
-                     
-                            if(jsSection[2]) {
-                                if(window.execScript) {
-                                    // 给IE的特殊待遇
-                                    window.execScript(jsSection[2]);
-                                } else {
-                                    // 给其他大部分浏览器用的
-                                    window.eval(jsSection[2]);
-                                }
-                            }
-                        }
-                    }
-
-                },
-                error:function(data){
-                }
-            });             
-        });
-        
-        
         // 时间在当前时间之前的单元格添加一个不能用的类同时删除opened类
             //获取当前时间并转化为php时间戳
         var times = new Date().getTime();
         var time = String(times);
         // var type = typeof(time);
         var phptime = time.slice(0,-3);
-        var book = $('td>button');
+        var book = $('#class_book td>button');
         // console.log(book);
         for (var i = book.length - 1; i >= 0; i--) {
             // 获取表格中对应的时间戳
@@ -175,7 +179,6 @@
             var booktime_arr = booktime.split('|');
             var table_time = Number(booktime_arr[0])+8*60*60+Number(booktime_arr[1]);
             if (table_time-phptime <= 2*3600) {
-                $(book[i]).removeClass('opened');
                 $(book[i]).removeClass('button-leaf');
                 $(book[i]).removeClass('button-red');
                 $(book[i]).removeClass('button-green');
@@ -184,63 +187,5 @@
             }
             // console.log(booktime);
         }
-        //对opened的单元格的单击双击事件
-        $(document).on('mouseup','.opened',function() {         
-            clickOrDblClick($(this));       
-        });         
-        
-
-        // var count = 0;       
-        // var timer;
-        // //判断单击双击事件的函数    
-        // function clickOrDblClick(s) {            
-        //  count++;            
-        //  timer = window.setTimeout(function() {
-        //      if (count == 1) {                   
-        //          var classtime = s.attr('classtime');
-        //          s.addClass('checked');
-        //          $.ajax({
-        //              type:'POST',
-        //              url:'/admin/tea_sclass/'+classtime,
-        //              dataType:'json',
-                        
-        //              headers:{
-        //                  'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
-        //              },
-        //              data:{"_method":"delete",'tid':tid[3]},
-        //              success:function(data){
-        //                  if (data.status == 1) {
-        //                      $('.checked').removeClass('am-btn-primary');
-        //                      $('.checked').removeClass('opened');
-        //                      $('.checked').addClass('am-btn-default');
-        //                      $('.checked').addClass('closed');
-        //                      $('.checked').html('closed');
-        //                      $('.checked').removeClass('checked');
-        //                  }else if(data.status == 0){
-        //                      location.reload();
-        //                  }
-        //              },
-        //              error:function(data){
-        //                  console.log(data.status);
-        //                  location.reload();
-        //              }
-        //          });             
-        //      } else {                    
-        //          $('.modal').addClass('in');             
-        //          $('.modal').attr('style','margin-top:200px;margin-left:300px;display:block;');
-        //          var tea = s.attr('tea');
-        //          var date_time = s.attr('date_time');
-        //          var date_date = s.attr('date_date');
-        //          console.log(tea);   
-        //          var clicktime = s.attr('classtime');
-        //          var clicktime_arr = clicktime.split('|');
-        //          var click_classtime = Number(clicktime_arr[0])+8*60*60+Number(clicktime_arr[1]);
-        //          $('#classtime').attr('value',click_classtime);
-        //          $('#model_title').html('您将预约 <b style="color:red;">'+tea+'</b>老师<b style="color:red;">'+date_date+' '+date_time+'</b>的课程');
-        //      }               
-        //      window.clearTimeout(timer)              
-        //      count = 0           
-        //  }, 300)     
-        // }
-    }); 
+    });
 </script>

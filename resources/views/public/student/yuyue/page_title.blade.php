@@ -14,6 +14,7 @@
 				</div>
 				<div class="col-md-4">
 		            <button href="#" class="btn btn-success btn-sm" >购买课程</button>
+		            <button href="#" class="btn btn-danger btn-sm" >预约必读</button>
 	            </div>
 			</div>
     	</div>
