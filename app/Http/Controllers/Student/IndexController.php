@@ -145,9 +145,11 @@ class IndexController extends Controller
      public function setuser(Request $request)
     {
         $rs = session('user_stu');
-        dump($rs);
-        return view('student.zhu.setuser',compact(['rs']));
+        $res = session('user_stu_m');
+        // dd($res);
+        return view('student.zhu.setuser',compact('rs','res'));
     }
+
     /**
      *  跳转到学生预约主页
      *     @param 

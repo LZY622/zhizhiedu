@@ -2,6 +2,11 @@
 @section('title','慧盈英语教育')
 @section('content')
 <section id="content">
+    <style type="text/css">
+        li,span{
+            font-family: "宋体";
+        }
+    </style>
 
     <div class="content-wrap">
         <div class="row clearfix bottommargin-lg common-height">
@@ -41,23 +46,28 @@
         <div class="container clearfix">
             <div class="row clearfix">
 
-                <div class="col-lg-2">
+                <div class="" style="width: 100%">
 
-                    <div style="position: relative; margin-bottom: -60px;" class="ohidden" data-height-lg="426" data-height-md="567" data-height-sm="470" data-height-xs="287" data-height-xxs="183">
+                    <div style="height: 400px;width: 18%;" class="ohidden">
                         <img src="{{$rs->img}}" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" data-delay="100" alt="Chrome">
                     </div>
 
-                </div>
-                <div class="col-lg-10">
-                    <div class="heading-block topmargin">
-                        <h1>机智的 {{$res->mname}}同学<br>欢迎来到慧盈教育</h1>
+                    <div class="heading-block topmargin" style="position: absolute; top: 0; left: 20%;">
+                        <h1>Hi, <span>{{$rs->phone}}</span></h1>
+                        <a href="/students/setuser">
+                            <button style="position: absolute; top: 0px; left: 100%;width: 130px" class="button button-3d button-rounded button-aqua">修改个人资料</button>
+                        </a>
+                        <h1>QQ号：<span>{{$res->qq}}</span></h1>
                     </div>
-                    <p class="lead">Create a website that you are gonna be proud of. Be it Business, Portfolio, Agency, Photography, eCommerce &amp; much more.</p>
+                    <ul>
+                        <li style="position: absolute; top: 55%; left: 25%;list-style: none; width: 35%;font-size: 20px;"><p>考试日期</p><span>{{$res->exam_date}}</span></li>
+                        <li style="position: absolute; top: 55%; left: 60%;list-style: none; width: 35%;font-size: 20px"><p class="icol32-flag-finish">目标分数</p><span>S={{$res->sgoal}}分 <br /> W={{$res->wgoal}}分</span></li>
+                    </ul>
+
                 </div>
-
-
             </div>
         </div>
+    </div>
 
         <!-- <div class="section nobottommargin">
             <div class="container clear-bottommargin clearfix">
@@ -302,6 +312,7 @@
                     <h3>Our Latest Works</h3>
                 </div>
             </div>
+>>>>>>> 71f7c0ad32aa5fdbe2a310620df7949426fc79b4
         </div>
 
         <div id="portfolio" class="portfolio-nomargin portfolio-notitle portfolio-full clearfix">
@@ -799,6 +810,6 @@
 
 </section>
 @stop
-@section('js')
+<!-- @section('js')
 
-@stop
+@stop -->

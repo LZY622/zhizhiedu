@@ -5,3 +5,4 @@
 <link rel="stylesheet" href="/student/function/css/animate.css" type="text/css" />
 <link rel="stylesheet" href="/student/function/css/magnific-popup.css" type="text/css" />
 <link rel="stylesheet" href="/student/function/css/responsive.css" type="text/css" />
+<link rel="stylesheet" href="/student/css/student.css" type="text/css" />

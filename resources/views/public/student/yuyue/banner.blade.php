@@ -3,20 +3,20 @@
 	<div class="swiper-container swiper-parent">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" style="background-image: url('/student/function/images/slider/swiper/banner.jpg'); background-position: center top;">
-				<div class="container clearfix">
+				<!-- <div class="container clearfix">
 					<div class="slider-caption">
 						<h2 data-caption-animate="fadeInUp">慧盈教育</h2>
 						<p data-caption-animate="fadeInUp" data-caption-delay="200">欢迎您来到慧盈教育</p>
 					</div>
-				</div>
+				</div> -->
 			</div>
-			<div class="swiper-slide" style="background-image: url('/student/function/images/slider/swiper/2.jpg'); background-position: center top;">
-				<div class="container clearfix">
+			<div class="swiper-slide" style="background-image: url('/student/function/images/slider/swiper/banner_2.jpg'); background-position: center top;">
+				<!-- <div class="container clearfix">
 					<div class="slider-caption">
 						<h2 data-caption-animate="fadeInUp">Great Performance</h2>
 						<p data-caption-animate="fadeInUp" data-caption-delay="200">You'll be surprised to see the Final Results of your Creation &amp; would crave for more.</p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div id="slider-arrow-left"><i class="icon-angle-left"></i></div>

@@ -62,7 +62,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
-        
+
         'qiniu' => [
             'driver'=> 'qiniu',
             'access_key' =>env('QINIU_ACCESS_KEY'),//个人面板的秘钥管理
