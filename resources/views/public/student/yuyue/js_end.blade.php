@@ -1,0 +1,1 @@
+<script type="text/javascript" src="/student/function/js/functions.js"></script>

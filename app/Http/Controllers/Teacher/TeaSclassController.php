@@ -92,7 +92,7 @@ class TeaSclassController extends Controller
             // dd($username);
         }
         $rs = session('user');
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         // dd('tea');
         $today = strtotime(date('Y-m-d',time()));
         $tea_sclass = [];

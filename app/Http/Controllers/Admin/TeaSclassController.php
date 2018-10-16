@@ -34,7 +34,7 @@ class TeaSclassController extends Controller
         // 设置查询老师
         $tid = $request->input('tid')?$request->input('tid'):0;
         // 找到老师信息
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         $tea_qq = Teauser::where('cate',2)->pluck('qq','id');
         // dd($tea);
         $res = TeaSclass::where(function($query) use($request,$tid){
@@ -83,7 +83,7 @@ class TeaSclassController extends Controller
         $status = [2,4,5,6,7];
         $cateid = ['0'=>'st','4'=>'cla','5'=>'mt'];
         // 找到老师信息
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         // 筛选课表中的信息
         foreach ($cateid as $key => $value) {
             foreach ($status as $k => $v) {
@@ -171,7 +171,7 @@ class TeaSclassController extends Controller
             // dd($username);
         }
         $rs = session('user');
-        $tea = Teauser::where('cate',2)->pluck('username','id');
+        $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
         // dd('tea');
         $today = strtotime(date('Y-m-d',time()));
         $tea_sclass = [];

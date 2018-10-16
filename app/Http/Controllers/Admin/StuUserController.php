@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Stuuser;
+use App\Model\Teauser;
 use App\Model\Stuuser_classnum;
 use App\Model\Stuuser_message;
 use App\Model\ClassnumAdd;
@@ -24,7 +25,7 @@ class StuUserController extends Controller
     public function index(Request $req)
     {
         $rs = session('user');
-        
+        $chushi_id = Teauser::where('cate',2)->where('status',1)->first()->id;
         if ($req->input('status') === '0') {
             $status = 0;
         }else{
@@ -55,7 +56,7 @@ class StuUserController extends Controller
             })
         ->with([])->orderBy('id', 'desc')->paginate(10);
             // dd($res[0]['user_classnum']);
-        return view('admin.stuuser.index',compact(['res','rs','req','status']));
+        return view('admin.stuuser.index',compact(['res','rs','req','status','chushi_id']));
     }
 
     /**
