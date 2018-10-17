@@ -140,3 +140,16 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <dateCreated>20181013021226</dateCreated>
     </TemplateSMS>
 </Response>
+request body = <TemplateSMS>
+                    <to>13726989923</to>
+                    <appId>8aaf070866235bc50166694b74c62610</appId>
+                    <templateId>1</templateId>
+                    <datas><data>8241</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da8662360a40166693cd8ee1ddd/SMS/TemplateSMS?sig=48643500A18D9A47E87283EE217FA0ED
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>112310</statusCode>
+    <statusMsg>【短信】应用未上线，模板短信接收号码外呼受限</statusMsg>
+</Response>
+
