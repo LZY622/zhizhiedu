@@ -188,8 +188,9 @@ class IndexController extends Controller
     {
         $rs = session('user_stu');
         $res = session('user_stu_m');
+        $lunbo = DB::table('lunbo')->get();
         // dd($res);
-        return view('student.zhu.setuser',compact('rs','res'));
+        return view('student.zhu.setuser',compact('rs','res','lunbo'));
     }
 
     /**
