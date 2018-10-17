@@ -42,6 +42,14 @@ Route::group(['middleware'=>['admin_login'],'namespace'=>'Admin','prefix'=>'admi
     Route::get('/stu_wcorrect/shenhe/{id}', 'StuWcorrectController@shenhe');
     Route::resource('/stu_wcorrect', 'StuWcorrectController');
     Route::resource('/tea_wcorrect', 'TeaWcorrectController');
+    // 前台控制
+    Route::get('/guanwang/seo','HeadController@seo');
+    Route::get('/guanwang/banner','HeadController@banner');
+    Route::post('/guanwang/up_banner','HeadController@up_banner');
+    Route::get('/guanwang/lunbo','HeadController@lunbo');
+    Route::get('/guanwang/lunbo_shan/{id}','HeadController@lunbo_shan');
+    Route::post('/guanwang/up_lunbo','HeadController@up_lunbo');
+    Route::get('/guanwang/add_lunbo','HeadController@add_lunbo');
 });
 //角色权限操作
 Route::group(['middleware'=>['admin_login'],'prefix'=>'rp'],function(){
@@ -82,6 +90,10 @@ Route::get('/login','Student\IndexController@login');
 Route::get('/signup','Student\IndexController@signup');
 Route::post('/zhuce','Student\IndexController@do_signup');
 Route::post('/do_login','Student\IndexController@do_login');
+Route::get('/youke','Student\IndexController@youke');
+Route::get('/lunbo','Student\IndexController@lunbo');
+// 无权限页面路由(权限中间件名字‘student_hasrole’)
+Route::get('/nopermission','Student\IndexController@nopermission');
 Route::get('/loginout','Student\IndexController@loginout');
 Route::get('/sendcode','Student\IndexController@sendCode');
 Route::group(['middleware'=>['student_login'],'namespace'=>'Student'],function(){

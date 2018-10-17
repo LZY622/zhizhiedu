@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'admin_login' => \App\Http\Middleware\Admin\LoginMiddleware::class,
         'teacher_login' => \App\Http\Middleware\Teacher\LoginMiddleware::class,
         'teacher_hasrole' => \App\Http\Middleware\Teacher\HasRoleMiddleware::class,
+        'student_hasrole' => \App\Http\Middleware\Student\HasRoleMiddleware::class,
         'student_login' => \App\Http\Middleware\Student\LoginMiddleware::class,
     ];
 }

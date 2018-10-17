@@ -110,6 +110,25 @@
                         查看角色权限列表
                     </a>
                 </li>
+                <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">主页内容管理</span></li>
+                <li class="sidebar-nav-link">
+                    <a href="/admin/guanwang/seo">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        SEO优化
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/admin/guanwang/banner">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        主页banner图设置
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/admin/guanwang/lunbo">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        学生主页轮播图设置
+                    </a>
+                </li>
 
 
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">备用模板</span></li>
