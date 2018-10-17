@@ -1,4 +1,7 @@
 @extends('layouts.student.students')
+@foreach($head as $k=>$v)
+    @section($k,$v)
+@endforeach
 @section('content')
 <link rel="stylesheet" href="https://img.acadsoc.com.cn/web/lps/om-tg/css/style.css"/>
 <!--baner-info start here-->
@@ -161,7 +164,7 @@
             </div>
         </div>
     </div>
-    
+    <a id="about"></a>
     <!-- <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <a href="#zc" data-toggle="modal" class="to-reg">免费申请试听课</a>

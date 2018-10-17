@@ -1,23 +1,18 @@
 <section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix">
 
 	<div class="swiper-container swiper-parent">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide" style="background-image: url('/student/function/images/slider/swiper/banner.jpg'); background-position: center top;">
-				<!-- <div class="container clearfix">
+		<div class="swiper-wrapper" id="lunbo">
+			@foreach($lunbo as $k=>$value)
+			<div class="swiper-slide lunbo" style="background-image: url('{{$value->url}}'); background-position: center top;">
+				<div class="container clearfix">
 					<div class="slider-caption">
-						<h2 data-caption-animate="fadeInUp">慧盈教育</h2>
-						<p data-caption-animate="fadeInUp" data-caption-delay="200">欢迎您来到慧盈教育</p>
+						<h2 data-caption-animate="fadeInUp">{{$value->h2}}</h2>
+						<p data-caption-animate="fadeInUp"data-caption-delay="200">{{$value->p}}
+						</p>
 					</div>
-				</div> -->
+				</div>
 			</div>
-			<div class="swiper-slide" style="background-image: url('/student/function/images/slider/swiper/banner_2.jpg'); background-position: center top;">
-				<!-- <div class="container clearfix">
-					<div class="slider-caption">
-						<h2 data-caption-animate="fadeInUp">Great Performance</h2>
-						<p data-caption-animate="fadeInUp" data-caption-delay="200">You'll be surprised to see the Final Results of your Creation &amp; would crave for more.</p>
-					</div>
-				</div> -->
-			</div>
+			@endforeach
 		</div>
 		<div id="slider-arrow-left"><i class="icon-angle-left"></i></div>
 		<div id="slider-arrow-right"><i class="icon-angle-right"></i></div>
@@ -85,7 +80,23 @@
 					});
 				}
 			});
+			$.ajax({
+		        type:'GET',
+		        url:'/lunbo',
+		        dataType:'json',
+		        data:{},
+		        success:function(data){
+		            // var div = '';
+		            for (var i = 0; i < data.length; i++) {
+		                var div = '<div class="swiper-slide lunbo" style="background-image: url(\''+data[i].url+'\'); background-position: center top;"><div class="container clearfix"><div class="slider-caption"><h2 data-caption-animate="fadeInUp">'+data[i].h2+'</h2><p data-caption-animate="fadeInUp" data-caption-delay="200">'+data[i].p+'</p></div></div></div>';
+		                $('.swiper-wrapper').append(div);
+		            }
+		        },
 
+		        error:function(data){
+		            
+		        }
+		    });
 			$('#slider-arrow-left').on('click', function(e){
 				e.preventDefault();
 				swiperSlider.swipePrev();

@@ -6,7 +6,10 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Meta tag Keywords -->
-
+<script src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+<script src="/assets/js/jquery.min.js"></script>
 <!-- css files -->
 <link rel="stylesheet" href="/student/dong/css/style.css" type="text/css" media="all" /> <!-- Style-CSS --> 
 <link rel="stylesheet" href="/student/dong/css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
@@ -57,11 +60,11 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                     @endif
                     <form action="/do_login" method="post">
                         {{csrf_field()}}
-                        <input placeholder="请输入手机号" name="phone" type="text" required=""><br><br>
+                        <input placeholder="请输入注册手机号" name="phone" type="text" required=""><br><br>
 
                         <input  placeholder="请输入密码" name="password" type="password"><br>
                         <div class="sub-w3l">
-                            <h6><a href="/signup" style="color: red;">立即注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">忘记密码?</a></h6>
+                            <h6><a href="/signup" style="color: red;">立即注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/youke">游客模式登录</a></h6>
                             <div class="right-w3l">
                                 <input type="submit" value="登录">
                             </div>

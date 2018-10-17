@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<title>慧盈英语教育</title>
+<title>@yield('title')</title>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -12,7 +12,9 @@
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="@yield('keywords')" />
+<meta name="description" content="@yield('description')">
+<meta name="keywords" content="@yield('keywords')">
+<link rel="icon" type="image/png" href="/assets/i/favicon.png">
 @include('public.student.css')
 @include('public.student.js')
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>

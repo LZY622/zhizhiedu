@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Stuuser_classnum;
 use DB;
 use App\Model\Teauser;
+use App\Model\Stufiles;
 use App\Model\StuWcorrect;
 use App\Model\TeaWcorrect;
 
@@ -188,14 +189,34 @@ class StuWcorrectController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 检查学生作文的状态是否可以修改并获取内容
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
-        //
+        $data = [];
+        $time_class = strtotime($request->classtime);
+        $time_cha = time()-$time_class;
+        if ($time_cha > 22*3600) {
+            $data['submited'] = 0;
+        }else{
+            $data['submited'] = 1;
+        }
+        $res = StuWcorrect::where('cid',$id)->first();
+        // dd($res);
+        if($res->fid){
+            $rs = DB::table('stu_files')->where('fid',$res->fid)->first();
+            $data['status'] = 1;
+            $data['title'] = $rs->title;
+            $data['content'] = $rs->content;
+        }else{
+            $data['status'] = 0;
+            $data['title'] = '';
+            $data['content'] = '';
+        }
+        return response()->json($data);
     }
 
     /**
@@ -213,7 +234,7 @@ class StuWcorrectController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 上传学生作文
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -221,7 +242,45 @@ class StuWcorrectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [];
+        // dd($request->input());
+        try{
+            if($request->content && $request->title){
+                $res = StuWcorrect::where('cid',$id)->first();
+                if ($res->fid) {
+                    $rs = Stufiles::where('fid',$res->fid)->first();
+                    $rs->title = $request->title;
+                    $rs->content = $request->content;
+                    $rs->save();
+                    $data['status'] = 1;
+                    $data['con'] = '修改成功';
+                    return response()->json($data);
+                }else{
+                    $req = $request->except('_token','_method');
+                    $fid = DB::table('stu_files')->insertGetId($req);
+                    $res->fid = $fid;
+                    if($res->status == 1){
+                        $res->status = 2;
+                        $res->save();
+                        $data['status'] = 1;
+                        $data['con'] = '上传成功';
+                        return response()->json($data);
+                    }else{
+                        $data['status'] = 0;
+                        $data['con'] = '未知错误';
+                        return response()->json($data);
+                    }
+                }
+            }else{
+                $data['status'] = 0;
+                $data['con'] = '上传失败，题目或者内容为空';
+                return response()->json($data);
+            }
+        }catch(\Exception $e){
+            $data['status'] = 0;
+            $data['con'] = '上传失败';
+            return response()->json($data);
+        }
     }
 
     /**
@@ -294,7 +353,6 @@ class StuWcorrectController extends Controller
             $tea_class->save();
             $stu_num->save();
             $data['status'] = 1;
-            $data['cid'] = $id;
             return response()->json($data);
         }catch(\Exception $e){
             $data['status'] = 0;

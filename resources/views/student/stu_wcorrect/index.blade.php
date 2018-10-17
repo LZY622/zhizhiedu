@@ -223,6 +223,42 @@
 	    </div>
 	</div>
 </div>
+<!-- 学生作文模态框 -->
+<div class="modal fade bs-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none; padding-right: 17px;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-body">
+			<div class="modal-content">
+    			<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"></h4>
+                    <span>当日22点之后将不允许再修改和上传，如有必须要改的地方请联系助教客服</span>
+                </div>
+		        <div class="modal-body">
+                    <!-- 配置文件 -->
+				    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+				    <!-- 编辑器源码文件 -->
+				    <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+				    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+				    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+				    <!-- 实例化编辑器 -->
+
+					<h4>请填写题目</h4>
+					<script id="title" name="title" type="text/plain">
+				        
+				    </script>
+				    <div class="line" style="margin:20px 0 20px 0;"></div>
+				    <h4>请输入内容</h4>
+				    
+				    <script id="container" name="content" type="text/plain">
+				        
+				    </script>
+                    <button type="button" class="button button-3d button-small button-rounded button-leaf" style="margin-left:40%" data-dismiss="modal" aria-hidden="true" id="submit_stu" disabled="">确&nbsp;&nbsp;定</button>
+		
+				</div>
+			</div>
+	    </div>
+	</div>
+</div>
 @stop
 @section('content3')
 @stop
@@ -351,7 +387,7 @@ $(function(){
 		    		$('#finishing tbody tr').remove();
 		    		for (var i = 0; i < data.con.length; i++) {
 		    			var d = new Date(Number(data.con[i].classtime+'000'));
-		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传作文</button></td><td><button class="button button-3d button-small button-rounded button-blue" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
+		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传 / 修改作文</button></td><td><button class="button button-3d button-small button-rounded button-blue" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
 		    			// // console.log(1);
 		    			$('#finishing tbody').append(tr);
 		    		}
@@ -377,7 +413,7 @@ $(function(){
 		    		$('#finishing tbody tr').remove();
 		    		for (var i = 0; i < data.con.length; i++) {
 		    			var d = new Date(Number(data.con[i].classtime+'000'));
-		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传作文</button></td><td><button class="button button-3d button-small button-rounded button-blue" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
+		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传 / 修改作文</button></td><td><button class="button button-3d button-small button-rounded button-blue" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
 		    			// console.log(1);
 		    			$('#finishing tbody').append(tr);
 		    		}
@@ -449,7 +485,7 @@ $(function(){
 		    		$('#xinxi div').remove();
 		    		var div = '<div class="alert alert-success" role="alert">取消成功</div>'
 		    		$('#xinxi').append(div);
-		    		$('button[cid="'+data.cid+'"]').parents('tr').remove();
+		    		$('li[status="1"]').trigger('click');
 		    		$('.alert-success').delay(2000).fadeOut(1000);
 					$('.alert-danger').delay(2000).fadeOut(1000);
 		    	}else{
@@ -464,6 +500,90 @@ $(function(){
 		        //错误信息
 		    }
    		});
+   	});
+   	// 上传作文按钮
+   	$(document).on('click','button[data-target=".bs-modal"]',function(){
+
+   		var tea_s = $(this).attr('tea');
+   		var classtime_s = $(this).attr('classtime');
+   		var cid_s = $(this).attr('cid');
+   		var cateid_s = $(this).attr('cateid');
+   		if (cateid_s == 13) {
+   			var cate_s = '大作文';
+   		}else{
+   			var cate_s = '小作文';
+   		}
+   		$('.bs-modal .modal-title').html('您查看或修改上传的是<b style="color:red;">'+tea_s+'</b>老师<b style="color:red;">'+classtime_s+'</b>的作文批改<b style="color:red;">【'+cate_s+'】</b>(课程id为'+cid_s+')');
+    	$('#submit_stu').attr('cid',cid_s);
+    	$.ajax({
+		    type:'GET',
+		    url:'/students/stu_wcorrect/'+cid_s,
+		    dataType:'json',
+		    data:{'classtime':classtime_s},
+		    success:function(data){
+	    		var ue = UE.getEditor('container');
+		        var uee = UE.getEditor('title');
+		        ue.ready(function() {
+		            if (data.submited) {
+		            	$('#submit_stu').removeClass('button-leaf');
+		            	$('#submit_stu').addClass('button-blue');
+		            	$('#submit_stu').removeAttr('disabled');
+		            	ue.setEnabled();
+		            }else{
+		            	$('#submit_stu').removeClass('button-blue');
+		            	$('#submit_stu').addClass('button-leaf');
+		            	$('#submit_stu').attr('disabled','disabled');
+		            	ue.setDisabled();
+		            }
+		            ue.setContent(data.content);
+		        });
+		        uee.ready(function() {
+		            if (data.submited) {
+		            	$('#submit_stu').removeAttr('disabled');
+		            	uee.setEnabled();
+		            }else{
+		            	$('#submit_stu').attr('disabled','disabled');
+		            	uee.setDisabled();
+		            }
+		            uee.setContent(data.title);
+		        });
+
+		    },
+		    error:function(data){
+		        
+		    }
+		});	
+   	});
+   	// 上传确定按钮
+   	$(document).on('click','#submit_stu',function(){
+   		$.ajax({
+		    type:'POST',
+		    url:'/students/stu_wcorrect/'+$(this).attr('cid'),
+		    dataType:'json',
+		    headers:{
+		        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+		    },
+		    data:{'_method':"PUT",'title':UE.getEditor('title').getContent(),'content':UE.getEditor('container').getContent()},
+		    success:function(data){
+	    		if (data.status == 1) {
+		    		$('#xinxi div').remove();
+		    		var div = '<div class="alert alert-success" role="alert">'+data.con+'</div>'
+		    		$('#xinxi').append(div);
+		    		$('li[status="1"]').trigger('click');
+		    		$('.alert-success').delay(2000).fadeOut(1000);
+					$('.alert-danger').delay(2000).fadeOut(1000);
+		    	}else{
+		    		$('#xinxi div').remove();
+		    		var div = '<div class="alert alert-danger" role="alert">'+data.con+'</div>'
+		    		$('#xinxi').append(div);
+		    		$('.alert-success').delay(2000).fadeOut(1000);
+					$('.alert-danger').delay(2000).fadeOut(1000);
+		    	}
+		    },
+		    error:function(data){
+		        
+		    }
+		});	
    	});
 	// 时间戳转时间
 	function formatDate(now) {
