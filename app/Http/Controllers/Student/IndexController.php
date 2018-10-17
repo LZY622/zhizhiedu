@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\SignupRequest;
+use App\Http\Requests\Student\SetuserRequest;
 use \DB;
 use Hash;
 use App\library\SMS\SendTemplateSMS;
@@ -43,7 +44,7 @@ class IndexController extends Controller
      public function loginout()
      {
         session(['user_stu'=>'']);
-        return redirect('/');
+        return redirect('/login');
      }
 
     /**
@@ -148,6 +149,57 @@ class IndexController extends Controller
         $res = session('user_stu_m');
         // dd($res);
         return view('student.zhu.setuser',compact('rs','res'));
+    }
+
+    /**
+     *  处理设置个人信息传入的数据
+     *     @param 
+     *  @return 
+     */
+    public function do_setuser(SetuserRequest $request)
+    {
+        //获取密码并且加密
+        if (empty($request->password)) {
+            $request->password = session('user_stu')->password;
+        }else{
+            $pattern = "/^\S{6,12}$/";
+            if (!preg_match($pattern,$request->password)) {
+                return back()->with('errors','新密码格式不对');
+            }
+            $request->password = Hash::make($request->password);
+        }
+        // dd($request->password);
+        // 如果有文件上传处理文件 并且做为获取的图片数据 
+        if($request->hasFile('img')){
+            //自定义名字
+            $name = time().rand(1111,9999);
+
+            //获取后缀
+            $suffix = $request->file('img')->getClientOriginalExtension(); 
+
+            //移动
+            $request->file('img')->move('uploads/student',$name.'.'.$suffix);
+            $request->img = '/uploads/student/'.$name.'.'.$suffix;
+        }
+        try{
+            $re = $request->only('phone');
+            $re['password'] = $request->password;
+            $re['img'] = $request->img;
+            // dd($re);
+            $rss = $request->only('mname','sex','taobaoID','exam_date','qq','sgoal','wgoal');
+            $rs = DB::table('stu_users')->where('id',session('user_stu')->id)->update($re);
+            $rs = DB::table('users_message')->where('uid',session('user_stu')->id)->update($rss);
+
+            // 查得老图片
+            $old_img = session('user_stu')->img;
+            // 如果此时这条数据的img不是默认值并且获取数据的img值不为空 删除老图片
+            if ((session('user_stu')->img != '/uploads/student/123.jpg') && (!empty($re['img']))) {
+                unlink('.'.$old_img);
+            }
+            return redirect('/loginout');
+        }catch(\Exception $e){
+            return back()->with('errors','修改失败');
+        }
     }
 
     /**

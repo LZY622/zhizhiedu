@@ -86,7 +86,7 @@ Route::get('/loginout','Student\IndexController@loginout');
 Route::get('/sendcode','Student\IndexController@sendCode');
 Route::group(['middleware'=>['student_login'],'namespace'=>'Student'],function(){
     Route::get('/students/setuser','IndexController@setuser');
-    // Route::post('/setuser','IndexController@do_setuser');
+    Route::post('/students/do_setuser','IndexController@do_setuser');
     Route::get('/students','IndexController@student');
 });
 Route::group(['middleware'=>['student_login'],'namespace'=>'Student','prefix'=>'students'],function(){

@@ -46,14 +46,14 @@
         <div class="container clearfix">
             <div class="row clearfix">
 
-                <div class="" style="width: 100%">
+                <div class="" style="width: 100%;background-color: #6dc2e7;">
 
                     <div style="height: 400px;width: 18%;" class="ohidden">
-                        <img src="{{$rs->img}}" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" data-delay="100" alt="Chrome">
+                        <img src="{{$rs->img}}" style="position: absolute; top: 0; left: 0;margin-top: 40%;border-radius: 50%" data-animate="fadeInUp" data-delay="100" alt="Chrome">
                     </div>
 
                     <div class="heading-block topmargin" style="position: absolute; top: 0; left: 20%;">
-                        <h1>Hi, <span>{{$rs->phone}}</span></h1>
+                        <h1>Hi, <span>{{$res->mname}}</span></h1>
                         <a href="/students/setuser">
                             <button style="position: absolute; top: 0px; left: 100%;width: 130px" class="button button-3d button-rounded button-aqua">修改个人资料</button>
                         </a>
