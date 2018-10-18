@@ -223,6 +223,10 @@ class IndexController extends Controller
             $request->file('img')->move('uploads/student',$name.'.'.$suffix);
             $request->img = '/uploads/student/'.$name.'.'.$suffix;
         }
+        else {
+            $request->img = session('user_stu')->img;
+        }
+        // dd($request->img);
         try{
             $re = $request->only('phone');
             $re['password'] = $request->password;
@@ -234,8 +238,8 @@ class IndexController extends Controller
 
             // 查得老图片
             $old_img = session('user_stu')->img;
-            // 如果此时这条数据的img不是默认值并且获取数据的img值不为空 删除老图片
-            if ((session('user_stu')->img != '/uploads/student/123.jpg') && (!empty($re['img']))) {
+            // 如果此时这条数据的img不是老图片并且获取数据的img值不为空 删除老图片
+            if ((session('user_stu')->img != $old_img) && (!empty($re['img']))) {
                 unlink('.'.$old_img);
             }
             return redirect('/loginout');

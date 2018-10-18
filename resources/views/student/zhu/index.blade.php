@@ -53,11 +53,12 @@
                     </div>
 
                     <div class="heading-block topmargin" style="position: absolute; top: 0; left: 20%;">
-                        <h1>Hi, <span>{{$res->mname}}</span></h1>
-                        <a href="/students/setuser">
-                            <button style="position: absolute; top: 0px; left: 100%;width: 130px" class="button button-3d button-rounded button-aqua">修改个人资料</button>
-                        </a>
-                        <h1>QQ号：<span>{{$res->qq}}</span></h1>
+                        <h1>Hi, <span>{{$res->mname}}</span>
+                            <a href="/students/setuser">
+                                <button style="width: 130px" class="button button-3d button-rounded button-aqua">修改个人资料</button>
+                            </a>
+                        </h1>
+                        <h1>电话号：<span>{{$rs->phone}}</span></h1>
                     </div>
                     <ul>
                         <li style="position: absolute; top: 55%; left: 25%;list-style: none; width: 35%;font-size: 20px;"><p>考试日期</p><span>{{$res->exam_date}}</span></li>

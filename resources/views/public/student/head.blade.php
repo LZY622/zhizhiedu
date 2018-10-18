@@ -15,9 +15,17 @@
 <meta name="description" content="@yield('description')">
 <meta name="keywords" content="@yield('keywords')">
 <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+<!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> -->
 @include('public.student.css')
 @include('public.student.js')
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="application/x-javascript"> 
+	addEventListener("load", function(){
+		setTimeout(hideURLbar, 0);
+	}, false);
+	function hideURLbar(){
+		window.scrollTo(0,1);
+	}
+</script>
 <!--Google Fonts-->
 <!-- start-smoth-scrolling -->
 
