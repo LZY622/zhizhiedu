@@ -13,6 +13,15 @@ use DB;
 class StuSclassController extends Controller
 {
     /**
+     *  构造函数 插入中间件
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('student_hasrole')->only('create');
+    }
+    /**
      * 展示学生预约口语课的页面(并且ajax切换老师)
      *
      * @return \Illuminate\Http\Response
@@ -37,6 +46,7 @@ class StuSclassController extends Controller
             $view = 'student.stu_sclass.ajax_teaclass';
         }else{
             $id = Teauser::where('cate',2)->where('status',1)->first()->id;
+            $modal_con = DB::table('notice_con')->where('type','speak')->value('content');
             $view = 'student.stu_sclass.index';
         }
         // dd($id);
@@ -59,8 +69,7 @@ class StuSclassController extends Controller
         }
         $s_num = Stuuser_classnum::where('uid',session('user_stu')->id)->value('s_num');
         $m_num = Stuuser_classnum::where('uid',session('user_stu')->id)->value('m_num');
-
-        return view($view,compact('tea','tea_sclass','tea_sclass_booked','id','today','s_num','m_num',$var));
+        return view($view,compact('tea','tea_sclass','tea_sclass_booked','id','today','s_num','m_num',$var,'modal_con'));
     }
 
     /**

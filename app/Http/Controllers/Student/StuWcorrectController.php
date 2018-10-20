@@ -14,6 +14,15 @@ use App\Model\TeaWcorrect;
 class StuWcorrectController extends Controller
 {
     /**
+     *  构造函数 插入中间件
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('student_hasrole')->only('create');
+    }
+    /**
      * 展示空课页面
      *
      * @return \Illuminate\Http\Response
@@ -42,6 +51,7 @@ class StuWcorrectController extends Controller
             $view = 'student.stu_wcorrect.ajax_teacorrect';
         }else{
             $cateid = 13;
+            $modal_con = DB::table('notice_con')->where('type','write')->value('content');
             $view = 'student.stu_wcorrect.index';
         }
 
@@ -70,7 +80,8 @@ class StuWcorrectController extends Controller
         }
         $sw_num = Stuuser_classnum::where('uid',session('user_stu')->id)->value('sw_num');
         $bw_num = Stuuser_classnum::where('uid',session('user_stu')->id)->value('bw_num');
-        return view($view,compact($var,'res_tids','res','tid','start','cateid','tea','teacateid','sw_num','bw_num'));
+
+        return view($view,compact($var,'res_tids','res','tid','start','cateid','tea','teacateid','sw_num','bw_num','modal_con'));
     }
 
     /**

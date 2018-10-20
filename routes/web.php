@@ -50,6 +50,8 @@ Route::group(['middleware'=>['admin_login'],'namespace'=>'Admin','prefix'=>'admi
     Route::get('/guanwang/lunbo_shan/{id}','HeadController@lunbo_shan');
     Route::post('/guanwang/up_lunbo','HeadController@up_lunbo');
     Route::get('/guanwang/add_lunbo','HeadController@add_lunbo');
+    Route::get('/guanwang/notice','HeadController@notice');
+    Route::post('/guanwang/notice_upd','HeadController@notice_upd');
 });
 //角色权限操作
 Route::group(['middleware'=>['admin_login'],'prefix'=>'rp'],function(){

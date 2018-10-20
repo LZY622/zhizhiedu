@@ -8,7 +8,7 @@
     }
     
 </style>
-<div id="xinxi" style="position: fixed;top: 50%;width: 60%;z-index: 100;text-align: center;" >
+<div id="xinxi" style="position: fixed;top: 50%;width: 60%;z-index: 100;text-align: left;" >
     @if(session('success') || (!empty($success)))  
     <div class="alert alert-success" role="alert">
         {{session('success')?session('success'):$success}}  
@@ -117,7 +117,7 @@
 </table>
 <!-- 预约按钮 -->
 <div style="position: fixed;bottom: 20%;left: 50%;z-index: 20;">
-    <button class="button button-rounded button-reveal button-xlarge button-dirtygreen" data-toggle="modal" data-target=".chooseclass" id="book_one">
+    <button class="button button-rounded button-reveal button-xlarge button-dirtygreen"  data-target=".chooseclass" id="book_one">
         <i class="icon-book"></i>
         <span>预&nbsp;&nbsp;&nbsp;约</span>
     </button>

@@ -12,15 +12,18 @@
                 </span>
                 </div>
                 <!-- 搜索 -->
-                <div class="am-fl tpl-header-search">
-                    
+                <div class="am-fl tpl-header-switch-button" style="margin-left: -8px">
+                   <a href="javascript:;"><span>李子越</span></a>
+                </div>
+                <div class="am-fl tpl-header-switch-button" style="margin-left: -8px">
+                   <a href="javascript:;"><span>李子越</span></a>
                 </div>
                 <!-- 其它功能-->
                 <div class="am-fr tpl-header-navbar">
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>{{$rs->username}}</span> </a>
+                            <a href="/admin/setuser">欢迎你, <span>{{$rs->username}}</span> </a>
                         </li>
 
                         <!-- 新邮件 -->

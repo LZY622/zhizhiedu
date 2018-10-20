@@ -203,6 +203,7 @@
     			<div class="widget am-cf">
     			<div class="widget-head am-cf">
 		            <div class="widget-title am-fl" id="model_title"></div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">关闭</button>
 		        </div>
 		        <div class="widget-body am-fr">
 		            <form class="am-form tpl-form-border-form tpl-form-border-br" action="" method="get" enctype="multipart/form-data" id="upd_num">

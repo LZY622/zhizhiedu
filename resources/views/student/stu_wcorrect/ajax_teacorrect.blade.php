@@ -69,13 +69,13 @@
 					@else
 						@if($result->status == 1)
 						<td>
-							<button class="button button-3d button-small button-rounded button-green" data-toggle="modal" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}">
+							<button class="button button-3d button-small button-rounded button-green" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}">
 								正常 ({{$result->num}} / {{$result->total_num}})
 							</button>
 						</td>
 						@elseif($result->status == 2)
 						<td>
-							<button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}" >
+							<button class="button button-3d button-small button-rounded button-red" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}" >
 								即将约满还有1篇
 							</button>
 						</td>

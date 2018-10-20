@@ -1,0 +1,4 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^www\.nouveau-domaine\.com
+RewriteRule (.*) https://yahoo.fr/$1 [R=301,L]

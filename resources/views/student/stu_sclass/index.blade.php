@@ -1,11 +1,32 @@
 @extends('layouts.student.studentyuyue')
 @section('title','慧盈英语教育')
 @section('page_title','雅思口语预约')
+@section('link_title','作文批改')
+@section('link','/students/stu_wcorrect')
 @section('num_name1','口语课剩余课时')
 @section('num_name2','口语模考剩余课时')
 @section('num1',$s_num)
 @section('num2',$m_num)
 <meta name="csrf-token" content="{{csrf_token()}}">
+<!-- 起初提醒的模态框 -->
+<div class="modal fade notice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none; padding-right: 17px;">
+	<div class="modal-dialog modal-ml">
+		<div class="modal-body">
+			<div class="modal-content">
+    			<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">雅思口语预约前请仔细阅读</h4>
+                </div>
+		        <div class="modal-body">
+                    <div id="notice_con" class="modal-body"></div>
+                    <input type="hidden" name="notice_con" value="{{$modal_con}}">
+                    <button type="button" class="button button-3d button-small button-rounded button-blue" data-dismiss="modal" aria-hidden="true" id="notice_close">已经晓得，谢谢！</button>
+                    <label><input type="checkbox" name="tan" value="1"> 不再自动弹出</label>
+				</div>
+			</div>
+	    </div>
+	</div>
+</div>
 <div id="xinxi" style="position: fixed;top: 50%;width: 100%;z-index: 100;text-align: center;" >
 	@if(session('success') || (!empty($success)))  
 	<div class="alert alert-success" role="alert">
@@ -30,7 +51,6 @@
 	@include('public.student.yuyue.sidenav_speak')
 @stop
 @section('content1')
-
 <style>
 	.button-teal{
 		cursor: no-drop;
@@ -129,7 +149,7 @@
 </table>
 <!-- 预约按钮 -->
 <div style="position: fixed;bottom: 20%;left: 50%;z-index: 20;">
-	<button class="button button-rounded button-reveal button-xlarge button-dirtygreen" data-toggle="modal" data-target=".chooseclass" id="book_one">
+	<button class="button button-rounded button-reveal button-xlarge button-dirtygreen" data-target=".chooseclass" id="book_one">
 		<i class="icon-book"></i>
 		<span>预&nbsp;&nbsp;&nbsp;约</span>
 	</button>
@@ -253,6 +273,25 @@
 	$('.alert-success').delay(2000).fadeOut(1000);
     $('.alert-danger').delay(2000).fadeOut(1000);
     $(function(){
+    	// 填充提示信息内容
+    	$('#notice_con').html($('input[name=notice_con]').val());
+    	// 判断是否自动弹出
+    	if(window.sessionStorage["jizhu_speak"] && window.sessionStorage.getItem("jizhu_speak") == 1){
+		}else{
+			$(".notice").modal({backdrop:false}); 
+		}
+		// 为notice_button绑定事件
+		$(document).on('click','#notice_button',function(){
+			$(".notice").modal({backdrop:false}); 
+		});
+		// 为关掉按钮绑定事件
+		$(document).on('click','#notice_close',function(){
+			if ($('input[type=checkbox]:checked').length) {
+				window.sessionStorage["jizhu_speak"] = 1;
+			}else{
+				window.sessionStorage["jizhu_speak"] = 0;
+			}
+		});
     	// 页面刷新显示要与传来的id的值一致
     	var old_id = $('select[name=tea_name]').attr('oldid');
     	$('select[name=tea_name]').val(old_id);
@@ -342,6 +381,7 @@
 		});
 		// 绑定预约按钮的事件
 		$(document).on('click','#book_one',function(){
+			$('.chooseclass').modal({backdrop:false});
 			var checked = $('#class_book .button-lime');
 			var length = checked.length;
 			if (length) {
@@ -360,10 +400,10 @@
 				}
 				// 确定按钮的变化插入
 				if ($('#class_cateid').val() === 'no') {
-					var button = $('<tr><td colspan="2"><button class="button button-3d button-small button-rounded button-teal" disabled id="book_stu"  class="close" data-dismiss="modal" aria-hidden="true">请选择课程类型</button></td></tr>');
+					var button = $('<tr><td colspan="2"><button class="button button-3d button-small button-rounded button-teal" disabled id="book_stu"  data-dismiss="modal" aria-hidden="true">请选择课程类型</button></td></tr>');
 					$('.chooseclass tbody').append(button);
 				}else{
-					var button = $('<tr><td colspan="2"><button class="button button-3d button-small button-rounded button-blue" id="book_stu"  class="close" data-dismiss="modal" aria-hidden="true">确定</button></td></tr>');
+					var button = $('<tr><td colspan="2"><button class="button button-3d button-small button-rounded button-blue" id="book_stu"  data-dismiss="modal" aria-hidden="true">确定</button></td></tr>');
 					$('.chooseclass tbody').append(button);
 				}
 				// 添加确定按钮的属性便于传输数据
@@ -371,7 +411,7 @@
 				$('#book_stu').attr('tid',$('select[name=tea_name]').val());
 				$('#book_stu').attr('cateid',$('#class_cateid').val());
 			}else{
-				$('.chooseclass #myModalLabel').html('请您选择课时哦');
+				$('.chooseclass #myModalLabel').html('请您选择课时时间（点击显示“OPENED”的按钮）哦');
 				$('.chooseclass tbody>tr').remove();
 			}
 			
@@ -393,6 +433,8 @@
 		});
 		// 绑定学生预约确定按钮按钮
 		$(document).on('click','#book_stu',function(){
+			$('body').removeClass('modal-open');
+			$('body').attr('style','');
 			var t = $(this);
 			$.ajax({
 			    type:'GET',
@@ -400,6 +442,7 @@
 			    dataType:'html',
 			    data:{'id':t.attr('tid'),'cateid':t.attr('cateid'),'classtime':t.attr('classtime')},
 			    success:function(data){
+			    	// alert(data);
 			    	$('#snav-content1').html('');
 		    		$('#snav-content1').html(data);
 			    	// 第一步：匹配加载的页面中是否含有js
@@ -449,7 +492,7 @@
 			    		$('#finishing tbody tr').remove();
 			    		for (var i = 0; i < data.con.length; i++) {
 			    			var d = new Date(Number(data.con[i].classtime+'000'));
-			    			var tr = $('<tr><td>'+formatDate(d)+'</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.tea_qq[data.con[i].tid]+'</td><td>'+data.cateid[data.con[i].cateid]+'</td><td><button class="button button-3d button-small button-rounded button-red cb_btn" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" time="'+formatDate(d)+'" catename="'+data.cateid[data.con[i].cateid]+'" data-toggle="modal" data-target=".cb_modal">取消</button></td></tr>');
+			    			var tr = $('<tr><td>'+formatDate(d)+'</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.tea_qq[data.con[i].tid]+'</td><td>'+data.cateid[data.con[i].cateid]+'</td><td><button class="button button-3d button-small button-rounded button-red cb_btn" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" time="'+formatDate(d)+'" catename="'+data.cateid[data.con[i].cateid]+'"  data-target=".cb_modal">取消</button></td></tr>');
 			    			// console.log(1);
 			    			$('#finishing tbody').append(tr);
 			    		}
@@ -475,7 +518,7 @@
 			    		$('#finishing tbody tr').remove();
 			    		for (var i = 0; i < data.con.length; i++) {
 			    			var d = new Date(Number(data.con[i].classtime+'000'));
-			    			var tr = $('<tr><td>'+formatDate(d)+'</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.tea_qq[data.con[i].tid]+'</td><td>'+data.cateid[data.con[i].cateid]+'</td><td><button class="button button-3d button-small button-rounded button-red cb_btn" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" time="'+formatDate(d)+'" catename="'+data.cateid[data.con[i].cateid]+'" data-toggle="modal" data-target=".cb_modal">取消</button></td></tr>');
+			    			var tr = $('<tr><td>'+formatDate(d)+'</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.tea_qq[data.con[i].tid]+'</td><td>'+data.cateid[data.con[i].cateid]+'</td><td><button class="button button-3d button-small button-rounded button-red cb_btn" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" time="'+formatDate(d)+'" catename="'+data.cateid[data.con[i].cateid]+'"  data-target=".cb_modal">取消</button></td></tr>');
 			    			// console.log(1);
 			    			$('#finishing tbody').append(tr);
 			    		}
@@ -506,6 +549,7 @@
 		});
 		// 所有的取消按钮绑定一个事件
 		$(document).on('click','button[data-target=".cb_modal"]',function(){
+			$(".cb_modal").modal({backdrop:false});
 			var tea = $(this).attr('tea');
 			var cid = $(this).attr('cid');
 			var time = $(this).attr('time');

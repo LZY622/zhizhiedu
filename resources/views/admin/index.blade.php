@@ -20,7 +20,10 @@
 	        </ul>
 	    </div>
 	@endif
-	
+	<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+		</div>
+	</div>
 @endsection
 @section('js')
 <script>

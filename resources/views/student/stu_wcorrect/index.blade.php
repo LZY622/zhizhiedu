@@ -1,11 +1,32 @@
 @extends('layouts.student.studentyuyue')
 @section('title','慧盈英语教育')
 @section('page_title','雅思作文批改预约')
+@section('link_title','口语类课程')
+@section('link','/students/stu_sclass')
 @section('num_name1','小作文批改剩余篇数')
 @section('num_name2','大作文批改剩余篇数')
 @section('num1',$sw_num)
 @section('num2',$bw_num)
 <meta name="csrf-token" content="{{csrf_token()}}">
+<!-- 起初提醒的模态框 -->
+<div class="modal fade notice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none; padding-right: 17px;">
+	<div class="modal-dialog modal-ml">
+		<div class="modal-body">
+			<div class="modal-content">
+    			<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">作文批改预约前请仔细阅读</h4>
+                </div>
+		        <div class="modal-body">
+                    <div id="notice_con" class="modal-body"></div>
+                    <input type="hidden" name="notice_con" value="{{$modal_con}}">
+                    <button type="button" class="button button-3d button-small button-rounded button-blue" data-dismiss="modal" aria-hidden="true" id="notice_close">已经晓得，谢谢！</button>
+                    <label><input type="checkbox" name="tan" value="1"> 不再自动弹出</label>
+				</div>
+			</div>
+	    </div>
+	</div>
+</div>
 <div id="xinxi" style="position: fixed;top: 50%;width: 100%;z-index: 100;text-align: center;" >
 	@if(session('success') || (!empty($success)))  
 	<div class="alert alert-success" role="alert">
@@ -80,13 +101,13 @@
 					@else
 						@if($result->status == 1)
 						<td>
-							<button class="button button-3d button-small button-rounded button-green" data-toggle="modal" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}">
+							<button class="button button-3d button-small button-rounded button-green" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}">
 								正常 ({{$result->num}} / {{$result->total_num}})
 							</button>
 						</td>
 						@elseif($result->status == 2)
 						<td>
-							<button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}" >
+							<button class="button button-3d button-small button-rounded button-red" data-target=".bs-modal-lg" style="font-size: 12px;" classtime="{{$start+24*3600*$i}}" tid="{{$v}}"  cateid="{{$teacateid[$v]}}" tea="{{$tea[$v]}}" date="{{date('Y-m-d',$start+24*3600*$i)}}" >
 								即将约满还有1篇
 							</button>
 						</td>
@@ -111,7 +132,7 @@
         <!-- more data -->
     </tbody>
 </table>
-<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none; padding-right: 17px;">
+	<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none; padding-right: 17px;" backdrop="false">
 	<div class="modal-dialog modal-ml">
 		<div class="modal-body">
 			<div class="modal-content">
@@ -123,7 +144,7 @@
                     <input type="hidden" value="" name="tid">
                     <input type="hidden" value="" name="cateid">
                     <input type="hidden" value="" name="classtime" id="classtime">
-	                <button type="button" class="button button-3d button-small button-rounded button-blue" style="margin-left:40%" id="book_stu" data-dismiss="modal" aria-hidden="true">确&nbsp;&nbsp;定</button>
+	                <button type="button" class="button button-3d button-small button-rounded button-blue" data-dismiss="modal" aria-hidden="false" style="margin-left:40%" id="book_stu">确&nbsp;&nbsp;定</button>
 				</div>
 			</div>
 	    </div>
@@ -265,8 +286,30 @@
 @section('content4')
 @stop
 @section('js')
+<!-- <input type="hidden" name="jizhu" value="{{session('jizhu')}}"> -->
 <script>
 $(function(){
+	// 填充提示信息内容
+    $('#notice_con').html($('input[name=notice_con]').val());
+    // 判断是否自动弹出
+	if(window.sessionStorage["jizhu"] && window.sessionStorage.getItem("jizhu") == 1){
+
+	}else{
+		$(".notice").modal({backdrop:false}); 
+	}
+	// 为notice_button绑定事件
+	$(document).on('click','#notice_button',function(){
+		$(".notice").modal({backdrop:false}); 
+	});
+	// 为关掉按钮绑定事件
+	$(document).on('click','#notice_close',function(){
+		if ($('input[type=checkbox]:checked').length) {
+			window.sessionStorage["jizhu"] = 1;
+		}else{
+			window.sessionStorage["jizhu"] = 0;
+		}
+	});
+	// 初始化警示条
   	$('.alert-success').delay(2000).fadeOut(1000);
   	$('.alert-danger').delay(2000).fadeOut(1000);
   	// 页面刷新显示要与传来的id的值一致
@@ -274,6 +317,7 @@ $(function(){
 	$('select[name=cateid]').val(old_id);
    // 模态框单击事件
     $(document).on('click','button[data-target=".bs-modal-lg"]',function(){
+    	$(".bs-modal-lg").modal({backdrop:false});
    		$('input[name=classtime]').val($(this).attr('classtime'));
    		$('input[name=cateid]').val($(this).attr('cateid'));
    		$('input[name=tid]').val($(this).attr('tid'));
@@ -333,6 +377,8 @@ $(function(){
 	// 绑定学生预约确定按钮按钮
 	$(document).on('click','#book_stu',function(){
 		var t = $(this);
+		$('body').removeClass('modal-open');
+		$('body').removeAttr('style');
 		$.ajax({
 		    type:'GET',
 		    url:'/students/stu_wcorrect/create',
@@ -387,7 +433,7 @@ $(function(){
 		    		$('#finishing tbody tr').remove();
 		    		for (var i = 0; i < data.con.length; i++) {
 		    			var d = new Date(Number(data.con[i].classtime+'000'));
-		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传 / 修改作文</button></td><td><button class="button button-3d button-small button-rounded button-blue" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
+		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传 / 修改作文</button></td><td><button class="button button-3d button-small button-rounded button-blue"  data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
 		    			// // console.log(1);
 		    			$('#finishing tbody').append(tr);
 		    		}
@@ -413,7 +459,7 @@ $(function(){
 		    		$('#finishing tbody tr').remove();
 		    		for (var i = 0; i < data.con.length; i++) {
 		    			var d = new Date(Number(data.con[i].classtime+'000'));
-		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red" data-toggle="modal" data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传 / 修改作文</button></td><td><button class="button button-3d button-small button-rounded button-blue" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
+		    			var tr = $('<tr><td>'+formatDate(d)+' 22:00</td><td>'+data.tea[data.con[i].tid]+'</td><td>'+data.cateid[data.tea_cate[data.con[i].tid]]+'</td><td><button class="button button-3d button-small button-rounded button-red"  data-target=".bs-modal" style="font-size: 12px;" cid="'+data.con[i].cid+'" tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">上传 / 修改作文</button></td><td><button class="button button-3d button-small button-rounded button-blue"  data-target=".bs-example-modal-lg" style="font-size: 12px;" cid="'+data.con[i].cid+'"  tea="'+data.tea[data.con[i].tid]+'" classtime="'+formatDate(d)+'" cateid="'+data.tea_cate[data.con[i].tid]+'">取消</button></td></tr>');
 		    			// console.log(1);
 		    			$('#finishing tbody').append(tr);
 		    		}
@@ -454,7 +500,7 @@ $(function(){
 	});
 	// 取消按钮
 	$(document).on('click','button[data-target=".bs-example-modal-lg"]',function(){
-   		
+   		$('.bs-example-modal-lg').modal({backdrop:false});
    		var tea = $(this).attr('tea');
    		var classtime = $(this).attr('classtime');
    		var cid = $(this).attr('cid');
@@ -503,7 +549,7 @@ $(function(){
    	});
    	// 上传作文按钮
    	$(document).on('click','button[data-target=".bs-modal"]',function(){
-
+   		$(".bs-modal").modal({backdrop:false});
    		var tea_s = $(this).attr('tea');
    		var classtime_s = $(this).attr('classtime');
    		var cid_s = $(this).attr('cid');

@@ -2,35 +2,35 @@
 	<div class="container">
 		 <div class="header-main">
 			<!---->
-					<div class="header-logo">
-						<div class="logo">
-						<a href="/"><img src="/student/images/lo1.png" style="width: 70%"></a>
-						</div>
-						<div class="top-nav">
-							<span class="icon"><img src="/student/images/menu.png" alt=""> </span>
-							<ul>
-								<li><a href="/">首页</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<li><a href="">购买课程</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<li><a href="/students">在线预约</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<li><a href="#about">关于我们</a></li>
-							</ul>
-							<!--script-->
+			<div class="header-logo">
+				<div class="logo">
+				<a href="/students/stu_sclass"><img src="/student/images/lo1.png" style="width: 70%"></a>
+				</div>
+				<div class="top-nav">
+					<span class="icon"><img src="/student/images/menu.png" alt=""> </span>
+					<ul>
+						<li><a href="/">首页</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<li><a href="https://shop142038042.taobao.com/">购买课程</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<li><a href="/students">学生主页</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<li><a href="#about">关于我们</a></li>
+					</ul>
+					<!--script-->
 						<script>
 							$("span.icon").click(function(){
 								$(".top-nav ul").slideToggle(500, function(){
 								});
 							});
-					</script>				
+						</script>				
 				</div>
 				<div class="clearfix"> </div>
-					</div>
+			</div>
 			<!---->
 			<div class="top-menu">					
 				<ul>
 					<li><a href="/">首页</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="">购买课程</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="/"> <img src="/student/images/lo1.png" alt=""> </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<li><a href="/students">在线预约</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<li><a href="https://shop142038042.taobao.com/" target="_blank">购买课程</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<li><a href="/students/stu_sclass"> <img src="/student/images/lo1.png" alt="" title="预约课程"> </a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<li><a href="/students">学生主页</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<li><a href="#about">关于我们</a></li>
 				</ul>
 			</div>

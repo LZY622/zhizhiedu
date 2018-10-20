@@ -152,6 +152,7 @@
 				<div class="widget am-cf">
 	    			<div class="widget-head am-cf">
 			            <div class="widget-title am-fl" id="model_title"></div>
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">关闭</button>
 			        </div>
 			        <div class="am-u-sm-1 ">
 	                    

@@ -215,6 +215,7 @@
     			<div class="widget am-cf">
     			<div class="widget-head am-cf">
 		            <div class="widget-title am-fl" id="shenhe_model_title"></div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
 		        </div>
 		        <div class="widget-body am-fr">
 		            <form class="am-form tpl-form-border-form tpl-form-border-br" action="" method="get" id="shenhe_upd_num">
@@ -236,6 +237,7 @@
     			<div class="widget am-cf">
 	    			<div class="widget-head am-cf">
 			            <div class="widget-title am-fl" id="stu_model_title"></div>
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
 			        </div>
 			        <div class="widget-body am-fr">
 			        	<!-- 配置文件 -->
@@ -277,6 +279,7 @@
 		            <div class="widget-title am-fl" id="con">
 		            	<!-- <span style="color:red;font-weight:900">上传成功</span> -->
 		            </div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
 		        </div>
 				<div class="widget-body am-fr">
 					<a href="" class="btn btn-info" id="word_file"></a>

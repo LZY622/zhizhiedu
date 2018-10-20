@@ -4,30 +4,30 @@
 
 <link rel="stylesheet" href="/assets/css/amazeui.min.css" / >
 
-<div class="tpl-block " style="margin-top: 40%;margin-left: ">
-
-@if(session('success'))  
-                    <div class="alert alert-success" role="alert">
-                        {{session('success')}}  
-
-                    </div>
-                    @endif
-                    @if (count($errors) > 0)
-                        <div class="alert alert-warning" role="alert">
-                            <ul>
-                                @if(is_object($errors))
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                @else
-                                    <li>{{ $errors }}</li>
-                                @endif
-                            </ul>
-                        </div>
-                    @endif
+<div class="tpl-block ">
+    <div style="margin:0 auto;width: 80%; text-align: center;margin-top: 30px">
+        <h1 style="font-size: 4rem;color: #999999;">修改您的信息</h1>
+    </div>
+    <div class="line" style="margin-top: 30px"></div>
+    @if(session('success'))  
+    <div class="alert alert-success" role="alert">
+        {{session('success')}}  
+    </div>
+    @endif
+    @if (count($errors) > 0)
+        <div class="alert alert-warning" role="alert">
+            <ul>
+                @if(is_object($errors))
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                @else
+                    <li>{{ $errors }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
     <div class="am-g tpl-amazeui-form">
-
-
         <div class="am-u-sm-12 am-u-md-9" style="width: 100%;background-color: #ccc">
             <form class="am-form am-form-horizontal" action="/students/do_setuser" method="post" enctype="multipart/form-data" style="margin-top: 4%; width: 100%">
                 {{csrf_field()}}
@@ -41,10 +41,10 @@
                 </div>
 
                 <div class="am-form-group">
-                    <label for="user-password" class="am-u-sm-3 am-form-label">密码 / Password</label>
+                    <label for="user-password" class="am-u-sm-3 am-form-label">新密码 / Password</label>
                     <div class="am-u-sm-9">
-                        <input type="password" name="password" id="user-password" placeholder="请输入密码 / Password">
-                        <small>记住这个密码哦...</small>
+                        <input type="password" name="password" id="user-password" placeholder="请输入新密码 / Password">
+                        <small>若不修改密码请填写原密码</small>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                     <label for="user-password" class="am-u-sm-3 am-form-label">确认密码 / Repass</label>
                     <div class="am-u-sm-9">
                         <input type="password" name="repass" id="user-password" placeholder="请再次输入密码 / Repass">
-                        <small>记住这个密码哦...</small>
+                        <small>与上面的密码框填写一致哦</small>
                     </div>
                 </div>
 

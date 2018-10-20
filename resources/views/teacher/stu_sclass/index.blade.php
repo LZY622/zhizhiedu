@@ -221,6 +221,7 @@
 			            <div class="widget-title am-fl" id="con">
 			            	<!-- <span style="color:red;font-weight:900">上传成功</span> -->
 			            </div>
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
 			        </div>
 					<div class="widget-body am-fr">
 						<a href="" class="btn btn-info"></a>
@@ -264,6 +265,7 @@
 			            <div class="widget-title am-fl" id="cont">
 			            	
 			            </div>
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
 			        </div>
 				    <div class="widget-body am-fr">
 				    	<table class="am-table am-table-compact am-table-striped tpl-table-black " width="100%">

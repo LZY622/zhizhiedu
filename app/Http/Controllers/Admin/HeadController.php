@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Model\SEO;
 use App\Model\Lunbo;
+use App\Model\Notice_con;
 use Input;
 
 class HeadController extends Controller
@@ -157,5 +158,37 @@ class HeadController extends Controller
      	}catch(\Exception $e){
 	     	return back()->with('errors','添加失败');
         }     	
+    }
+    /**
+     *  展示口语 作文预约页面中的注意事项
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function notice()
+    {
+        $res = DB::table('notice_con')->get();
+        $rs = session('user');
+        return view('admin.guanwang.notice',compact('rs','res'));
+    }
+    /**
+     *  更改内容
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function notice_upd(Request $request)
+    {
+        try{
+            $req = $request->except('_token','write','speak');
+            foreach ($req as $key => $value) {
+                $arr = explode('_', $key);
+                $res = Notice_con::where('type',$arr[0])->first();
+                $res->content = $value;
+                $res->save();
+            }
+            
+            return back()->with('success','修改成功');
+        }catch(\Exception $e){
+            return back()->with('errors','修改失败');
+        } 
     }
 }

@@ -9,9 +9,8 @@
 		<!-- Header
 		============================================= -->
 		@include('public.student.yuyue.header')<!-- #header end -->
-
-		@include('public.student.yuyue.banner')
-
+		@section('banner')
+		@show
 		<!-- Content
 		============================================= -->
 		@section('content')

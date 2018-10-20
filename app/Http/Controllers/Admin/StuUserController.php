@@ -32,7 +32,7 @@ class StuUserController extends Controller
             $status = 1;
         }
         // dd($status);
-        $res = Stuuser::where('status',$status)->whereHas('user_message',function($query) use($req)
+        $res = Stuuser::where('status',$status)->where('roles',10)->whereHas('user_message',function($query) use($req)
             {
                 //检测关键字
                 $username = $req->input('username');
@@ -54,7 +54,7 @@ class StuUserController extends Controller
                     $query->where('phone',$username);
                 }    
             })
-        ->with([])->orderBy('id', 'desc')->paginate(10);
+        ->with([])->where('status',$status)->where('roles',10)->orderBy('id', 'desc')->paginate(10);
             // dd($res[0]['user_classnum']);
         return view('admin.stuuser.index',compact(['res','rs','req','status','chushi_id']));
     }
