@@ -72,8 +72,14 @@ class IndexController extends Controller
      *  @param 
      *  @return 
      */
-    public function login()
+    public function login(Request $request)
     {
+        // $errors = $request->errors;
+        // session(['login_back'=>$login_back]);
+        // 将传过来跳转的值的值记录
+        if ($a = session('login_back')) {
+            session(['login_back_true'=>$a]);
+        }
         return view('student.login');
     }
 
@@ -147,6 +153,7 @@ class IndexController extends Controller
      */
      public function do_login(Request $request)
     {
+                // dd(session('login_back_true'));
         $rs = DB::table('stu_users')->where('phone',$request->phone)->get();
         // dd($rs);
         if(empty($rs[0]->phone)){
@@ -156,7 +163,12 @@ class IndexController extends Controller
             $res = DB::table('users_message')->where('uid',$rs[0]->id)->get();
             if (count($res)) {
                 session(['user_stu'=>$rs[0],'user_stu_m'=>$res[0]]);
-                return redirect('/students')->with('success','登陆成功');
+                // dd(session('login_back'));
+                if (session('login_back_true')) {
+                    return redirect('/'.session('login_back_true'))->with('success','登陆成功');
+                }else{
+                    return redirect('/students')->with('success','登陆成功');
+                }
             }else{
                 return back()->with('errors','登录失败，密码错误');
             }
@@ -259,11 +271,12 @@ class IndexController extends Controller
      */
      public function student()
     {
+        // dd($errors);
         $rs = session('user_stu');
         $res = session('user_stu_m');
         $num = Stuuser_classnum::where('uid',$rs->id)->first();
         $lunbo = DB::table('lunbo')->get();
         
-        return view('student.zhu.index',compact('rs','res','num','lunbo'))->with('success','登陆成功');
+        return view('student.zhu.index',compact('rs','res','num','lunbo'));
     }
 }

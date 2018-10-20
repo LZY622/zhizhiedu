@@ -1,7 +1,6 @@
 @extends('layouts.admin.admins')
 @section('title','吱吱英语后台管理')
 @section('content')
-大家好
 <style type="text/css" media="screen">
 	.delete-button{
 		background-attachment: scroll;

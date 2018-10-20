@@ -8,7 +8,7 @@
     }
     
 </style>
-<div id="xinxi" style="position: fixed;top: 50%;width: 60%;z-index: 100;text-align: center;" >
+<div id="xinxi" style="position: fixed;top: 50%;width: 60%;z-index: 100;text-align: left;" >
     @if(session('success') || (!empty($success)))  
     <div class="alert alert-success" role="alert">
         {{session('success')?session('success'):$success}}  

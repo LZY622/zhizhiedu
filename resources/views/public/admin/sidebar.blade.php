@@ -33,38 +33,38 @@
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">课程管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/stu_sclass/create">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-clock-o sidebar-nav-link-logo"></i> 
                         查看口语课程预约列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/tea_sclass">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-inbox sidebar-nav-link-logo"></i> 
                         查看空闲口语课程列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/stu_wcorrect/create">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-bookmark sidebar-nav-link-logo"></i> 
                         查看作文批改预约列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/tea_wcorrect">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-file-o sidebar-nav-link-logo"></i> 
                         查看未预约作文批改篇数列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/classcate">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-archive sidebar-nav-link-logo"></i> 
                         课程分类
                     </a>
                 </li>
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">学生管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/stuuser">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-user sidebar-nav-link-logo"></i> 
                         查看学生列表
                     </a>
                 </li>
@@ -72,33 +72,33 @@
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">老师管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/teauser">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-leaf sidebar-nav-link-logo"></i> 
                         查看老师列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/tea_sclass/create">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-th sidebar-nav-link-logo"></i> 
                         查看口语老师课时统计
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/tea_wcorrect/create">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-th sidebar-nav-link-logo"></i> 
                         查看作文批改老师篇数统计
                     </a>
                 </li>
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">助教管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/adminuser">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-eye sidebar-nav-link-logo"></i> 
                         查看助教列表
                     </a>
                 </li>
                <li class="sidebar-nav-link">
                 <!-- 课时数模块包含在用户模块里面 -->
                     <a href="/admin/stuuser/select_all">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 
                         查看助教添加课程记录
                     </a>
                 </li>
@@ -106,32 +106,32 @@
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">角色权限管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/rp/role">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-unlock sidebar-nav-link-logo"></i> 
                         查看角色权限列表
                     </a>
                 </li>
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">主页内容管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/guanwang/seo">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-gear sidebar-nav-link-logo"></i> 
                         SEO优化
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/guanwang/banner">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-gear sidebar-nav-link-logo"></i> 
                         主页banner图设置
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/guanwang/lunbo">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-gear sidebar-nav-link-logo"></i> 
                         学生主页轮播图设置
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/admin/guanwang/notice">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-gear sidebar-nav-link-logo"></i> 
                         学生预约页面通知设置
                     </a>
                 </li>

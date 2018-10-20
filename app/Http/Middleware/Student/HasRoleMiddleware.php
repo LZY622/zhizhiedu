@@ -20,7 +20,7 @@ class HasRoleMiddleware
     public function handle($request, Closure $next)
     {
 
-
+        // dd($request);
         //知道我有哪些角色 1 2 3 4
         $role = session('user_stu')->roles;
 
@@ -54,8 +54,10 @@ class HasRoleMiddleware
             return $next($request);
             
         } else {
-
-            return redirect('/nopermission');
+            if ($uls == 'App\Http\Controllers\Student\StuSclassController@create') {
+                return redirect('/nopermission');
+            }
+            return back()->with('errors','您登陆的是游客模式，无权限预约，请您点击右上角退出，点击“Study”登陆自己的账号哈！');
         }
         return $next($request);
     }

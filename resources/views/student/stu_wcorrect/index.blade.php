@@ -1,6 +1,8 @@
 @extends('layouts.student.studentyuyue')
 @section('title','慧盈英语教育')
 @section('page_title','雅思作文批改预约')
+@section('link_title','口语类课程')
+@section('link','/students/stu_sclass')
 @section('num_name1','小作文批改剩余篇数')
 @section('num_name2','大作文批改剩余篇数')
 @section('num1',$sw_num)

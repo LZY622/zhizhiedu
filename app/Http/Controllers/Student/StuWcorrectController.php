@@ -14,6 +14,15 @@ use App\Model\TeaWcorrect;
 class StuWcorrectController extends Controller
 {
     /**
+     *  构造函数 插入中间件
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('student_hasrole')->only('create');
+    }
+    /**
      * 展示空课页面
      *
      * @return \Illuminate\Http\Response

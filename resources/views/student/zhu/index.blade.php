@@ -1,7 +1,7 @@
 @extends('layouts.student.studentzhu')
 @section('title','慧盈英语教育')
 @section('banner')
-    @include('public.student.yuyue.banner')
+@include('public.student.yuyue.banner')
 @stop
 @section('content')
 <section id="content">
@@ -10,7 +10,26 @@
             font-family: "黑体";
         }
     </style>
-
+    <div style="z-index: 10;position: fixed;top: 50%;width: 100%;text-align: center; height: 60px;font-size: 20px;font-weight: 900;">
+        @if(session('success') || !empty($success))  
+        <div class="alert alert-success" role="alert">
+            {{session('success')?session('success'):$success}}  
+        </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-warning" role="alert">
+                <ul>
+                    @if(is_object($errors))
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    @else
+                        <li>{{ $errors }}</li>
+                    @endif
+                </ul>
+            </div>
+        @endif
+    </div>
     <div class="content-wrap">
         <div class="row clearfix bottommargin-lg common-height">
 
@@ -79,5 +98,8 @@
 @section('js')
 <script>
 
+    $('.alert-success').delay(2000).fadeOut(1000);
+    $('.alert-warning').delay(4000).fadeOut(1000);
+    
 </script>
 @stop

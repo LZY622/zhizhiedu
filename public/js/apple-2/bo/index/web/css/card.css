@@ -1,0 +1,96 @@
+﻿.creditCard, .cvv {
+    background-image: url(https://www.paypalobjects.com/webstatic/i/consumer/onboarding/sprites_cc_logos.png);
+    background-repeat: no-repeat;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio:2),only screen and (min--moz-device-pixel-ratio:2),only screen and (-o-min-device-pixel-ratio:2/1),only screen and (min-device-pixel-ratio:2) {
+    .creditCard, .cvv {
+        background-image: url(https://www.paypalobjects.com/webstatic/i/consumer/onboarding/sprites_cc_logos_2x.png);
+        background-size: 36px;
+    }
+}
+
+
+
+.creditCard, .cvv {
+    width: 37px;
+    height: 30px;
+    right: 18px;
+    top: 1px;
+    float: left;
+    position: absolute;
+    background-position: 0 82%;
+    z-index: 2;
+}
+
+.defaultCvv {
+    background-position: 0 88%;
+}
+
+.AMEXCvv {
+    background-position: 0 94%;
+}
+
+.creditCard.visa {
+    background-position: 0 -.7%;
+}
+
+.creditCard.amex {
+    background-position: 0 11%;
+}
+
+.creditCard.master_card {
+    background-position: 0 5%;
+}
+
+.creditCard.discover {
+    background-position: 0 17%;
+}
+
+.creditCard.switch {
+    background-position: 0 35%;
+}
+
+.creditCard.DINER {
+    background-position: 0 23%;
+}
+
+.creditCard.jcb {
+    background-position: 0 29%;
+}
+
+.creditCard.maestro {
+    background-position: 0 35%;
+}
+
+.creditCard.cb_nationale {
+    background-position: 0 47%;
+}
+
+.creditCard.confinoga {
+    background-position: 0 70%;
+}
+
+.creditCard.cofidis {
+    background-position: 0 76%;
+}
+
+.creditCard.cetelem {
+    background-position: 0 52.7%;
+}
+
+.IT .creditCard.cetelem {
+    background-position: 0 58.5%;
+}
+
+.ES .creditCard.cetelem {
+    background-position: 0 64.5%;
+}
+
+.C2 .creditCard.cup {
+    background-position: 0 100%;
+}
+
+.creditCard.iconText {
+    display: none;
+}

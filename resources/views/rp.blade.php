@@ -80,6 +80,7 @@
 	    <div class="widget am-cf">
 	        <div class="widget-head am-cf">
 	            <div class="widget-title am-fl">添加角色</div>
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	        </div>
 	        <div class="widget-body am-fr">
 	            <form class="am-form tpl-form-border-form tpl-form-border-br" action="/rp/role" method="post">
@@ -156,6 +157,7 @@
     			<div class="widget am-cf">
     			<div class="widget-head am-cf">
 		            <div class="widget-title am-fl">全部权限列表</div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		        </div>
 
 		        <div class="widget-body am-fr">
@@ -217,6 +219,7 @@
     			<div class="widget am-cf">
     			<div class="widget-head am-cf">
 		            <div class="widget-title am-fl" id="quanxian"></div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>	
 		        </div>
 		        <div class="widget-body am-fr">
 		        	<table class="am-table am-table-compact am-table-striped tpl-table-black " width="100%">

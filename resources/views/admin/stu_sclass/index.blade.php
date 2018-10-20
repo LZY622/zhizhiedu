@@ -228,6 +228,7 @@
     			<div class="widget am-cf">
     			<div class="widget-head am-cf">
 		            <div class="widget-title am-fl" id="model_title"></div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		        </div>
 		        <div class="widget-body am-fr">
 		            <form class="am-form tpl-form-border-form tpl-form-border-br" action="" method="post" id="upd_num">
@@ -267,6 +268,7 @@
 		            <div class="widget-title am-fl" id="con">
 		            	<!-- <span style="color:red;font-weight:900">上传成功</span> -->
 		            </div>
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">关闭</button>
 		        </div>
 				<div class="widget-body am-fr">
 					<a href="" class="btn btn-info"></a>

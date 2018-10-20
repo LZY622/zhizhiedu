@@ -13,6 +13,15 @@ use DB;
 class StuSclassController extends Controller
 {
     /**
+     *  构造函数 插入中间件
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('student_hasrole')->only('create');
+    }
+    /**
      * 展示学生预约口语课的页面(并且ajax切换老师)
      *
      * @return \Illuminate\Http\Response

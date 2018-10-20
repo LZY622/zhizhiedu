@@ -1,6 +1,8 @@
 @extends('layouts.student.studentyuyue')
 @section('title','慧盈英语教育')
 @section('page_title','雅思口语预约')
+@section('link_title','作文批改')
+@section('link','/students/stu_wcorrect')
 @section('num_name1','口语课剩余课时')
 @section('num_name2','口语模考剩余课时')
 @section('num1',$s_num)
@@ -49,7 +51,6 @@
 	@include('public.student.yuyue.sidenav_speak')
 @stop
 @section('content1')
-
 <style>
 	.button-teal{
 		cursor: no-drop;
@@ -410,7 +411,7 @@
 				$('#book_stu').attr('tid',$('select[name=tea_name]').val());
 				$('#book_stu').attr('cateid',$('#class_cateid').val());
 			}else{
-				$('.chooseclass #myModalLabel').html('请您选择课时哦');
+				$('.chooseclass #myModalLabel').html('请您选择课时时间（点击显示“OPENED”的按钮）哦');
 				$('.chooseclass tbody>tr').remove();
 			}
 			
@@ -441,6 +442,7 @@
 			    dataType:'html',
 			    data:{'id':t.attr('tid'),'cateid':t.attr('cateid'),'classtime':t.attr('classtime')},
 			    success:function(data){
+			    	// alert(data);
 			    	$('#snav-content1').html('');
 		    		$('#snav-content1').html(data);
 			    	// 第一步：匹配加载的页面中是否含有js

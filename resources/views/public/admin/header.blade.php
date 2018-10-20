@@ -13,14 +13,14 @@
                 </div>
                 <!-- 搜索 -->
                 <div class="am-fl tpl-header-search">
-                    
+                    <!-- <button class="btn btn-danger">学生列表</button> -->
                 </div>
                 <!-- 其它功能-->
                 <div class="am-fr tpl-header-navbar">
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>{{$rs->username}}</span> </a>
+                            <a href="/admin/setuser">欢迎你, <span>{{$rs->username}}</span> </a>
                         </li>
 
                         <!-- 新邮件 -->

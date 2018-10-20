@@ -38,7 +38,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                     <div class="wthree-pro">
                         <h2>欢迎登录</h2>
                     </div>
-
                     @if(session('success'))  
                     <div class="alert alert-success" role="alert">
                         {{session('success')}}  
