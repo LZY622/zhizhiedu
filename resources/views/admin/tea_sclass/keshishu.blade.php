@@ -237,7 +237,7 @@
 
     $('.alert-success').delay(2000).fadeOut(1000);
     $('.alert-warning').delay(2000).fadeOut(1000);
-    $('.am-fr ul').addClass("am-pagination tpl-pagination");
+    $('#pagenum ul').addClass("am-pagination tpl-pagination");
     $(function(){
     	var all = 0;
     	$('.total').each(function(){

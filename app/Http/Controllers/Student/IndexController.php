@@ -63,6 +63,18 @@ class IndexController extends Controller
      */
     public function index()
     {
+        // 检测重复开放课时以及开放篇数
+        // $res = DB::table('tea_sclass')->get();
+        // $res = DB::table('tea_wcorrect')->get();
+        // $jianren = [];
+        // foreach ($res as $k => $v) {
+        //     // $a = DB::table('tea_sclass')->where('tid',$v->tid)->where('classdate',$v->classdate)->where('classtime',$v->classtime)->get();
+        //     $a = DB::table('tea_wcorrect')->where('tid',$v->tid)->where('classtime',$v->classtime)->get();
+        //     if (count($a) != 1) {
+        //         $jianren[] = $v;
+        //     }
+        // }
+        // dd($jianren);
         $head = SEO::where('status',1)->first()->toArray();
     	return view('student.index',compact('head'));
     }
@@ -258,7 +270,7 @@ class IndexController extends Controller
             if ((session('user_stu')->img != $old_img) && (!empty($re['img']))) {
                 unlink('.'.$old_img);
             }
-            return redirect('/loginout');
+            return redirect('/login');
         }catch(\Exception $e){
             return back()->with('errors','修改失败');
         }
@@ -277,5 +289,26 @@ class IndexController extends Controller
         $num = Stuuser_classnum::where('uid',$rs->id)->first();
         $lunbo = DB::table('lunbo')->get();
         return view('student.zhu.index',compact('rs','res','num','lunbo'));
+    }
+    /**
+     *  忘记密码
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function forget(Request $request)
+    {
+        $data = [];
+        try{
+            $rs = DB::table('stu_users')->where('phone',$request->phone)->get();
+            if(count($rs) == 1){
+                DB::table('msm')->insert(['uid'=>$rs[0]->id,'message'=>1,'addtime'=>time()]);
+                $data['status'] = 1;
+            }else{
+                $data['status'] = 0;
+            }
+        }catch(\Exception $e){
+            $data['status'] = 0;
+        }
+        return response()->json($data);
     }
 }

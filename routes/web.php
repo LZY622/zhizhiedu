@@ -24,6 +24,9 @@ Route::post('/admin/do_login','Admin\IndexController@do_login');
 Route::get('/admin/loginout','Admin\IndexController@loginout');
 Route::group(['middleware'=>['admin_login'],'namespace'=>'Admin','prefix'=>'admin'],function(){
     Route::get('/','IndexController@index');
+    Route::get('/message','IndexController@message');
+    Route::get('/message/{id}','IndexController@messageid');
+    Route::get('/zhexian','IndexController@zhexian');
     Route::get('/setuser','IndexController@setuser');
     Route::post('/setuser','IndexController@do_setuser');
     Route::resource('/adminuser', 'AdminUserController');
@@ -94,6 +97,7 @@ Route::post('/zhuce','Student\IndexController@do_signup');
 Route::post('/do_login','Student\IndexController@do_login');
 Route::get('/youke','Student\IndexController@youke');
 Route::get('/lunbo','Student\IndexController@lunbo');
+Route::get('/forget','Student\IndexController@forget');
 // 无权限页面路由(权限中间件名字‘student_hasrole’)
 Route::get('/nopermission','Student\IndexController@nopermission');
 Route::get('/loginout','Student\IndexController@loginout');

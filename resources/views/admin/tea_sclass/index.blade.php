@@ -237,7 +237,7 @@
 			    	// console.log($('td [classtime=classtime]'));
 			    	if (data.status == 1) {
 			    		// console.log($('.booked[classtime="1538668800|5400"]'));
-			    		$('.booked[classtime="'+data.bookedtime+'"]').html('<span style="font-size:10px;">'+data.phone+'||'+data.catename+'</span>');
+			    		$('.booked[classtime="'+data.bookedtime+'"]').html('<span style="font-size:10px">'+data.phone+'||'+data.catename+'</span>');
 			    		$('.booked[classtime="'+data.bookedtime+'"]').click(function(){
 			    			alert('淘宝ID：'+data.taobaoID);
 			    		});

@@ -23,13 +23,13 @@
                         </li>
 
                         <!-- 新邮件 -->
-                        <li class="am-dropdown tpl-dropdown" data-am-dropdown>
+                        <!-- li class="am-dropdown tpl-dropdown" data-am-dropdown>
                             <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
                                 <i class="am-icon-envelope"></i>
                                 <span class="am-badge am-badge-success am-round item-feed-badge">4</span>
-                            </a>
+                            </a> -->
                             <!-- 弹出列表 -->
-                            <ul class="am-dropdown-content tpl-dropdown-content">
+                            <!-- <ul class="am-dropdown-content tpl-dropdown-content">
                                 <li class="tpl-dropdown-menu-messages">
                                     <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                         <div class="menu-messages-ico">
@@ -73,7 +73,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
 
                         
 

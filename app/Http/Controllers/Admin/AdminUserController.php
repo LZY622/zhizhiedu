@@ -20,7 +20,7 @@ class AdminUserController extends Controller
     public function index()
     {
         $rs = session('user');
-        $res = Adminuser::orderBy('id', 'desc')->paginate(5);
+        $res = Adminuser::orderBy('id', 'desc')->paginate(100);
         $role = Role::get();
         return view('admin.adminuser.index',compact(['res','rs','role']));
     }

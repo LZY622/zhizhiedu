@@ -1,94 +1,83 @@
 <header>
+    <style>
+        .kuaijie {
+            color: grey;
+            text-decoration: none;
+        }
+        .kuaijie:hover{
+            color: #2E6EA5;
+            text-decoration: none;
+        }
+    </style>
             <!-- logo -->
-            <div class="am-fl tpl-header-logo">
-                <a href="javascript:;"><img src="/assets/img/logo.png" alt=""></a>
-            </div>
-            <!-- 右侧内容 -->
-            <div class="tpl-header-fluid">
-                <!-- 侧边切换 -->
-                <div class="am-fl tpl-header-switch-button am-icon-list">
-                    <span>
+    <div class="am-fl tpl-header-logo">
+        <a href="javascript:;"><img src="/assets/img/logo.png" alt=""></a>
+    </div>
+    <!-- 右侧内容 -->
+    <div class="tpl-header-fluid">
+        <!-- 侧边切换 -->
+        <div class="am-fl tpl-header-switch-button am-icon-list">
+            <span>
 
-                </span>
-                </div>
-                <!-- 搜索 -->
-                <div class="am-fl tpl-header-switch-button" style="margin-left: -8px">
-                   <a href="javascript:;"><span>李子越</span></a>
-                </div>
-                <div class="am-fl tpl-header-switch-button" style="margin-left: -8px">
-                   <a href="javascript:;"><span>李子越</span></a>
-                </div>
-                <!-- 其它功能-->
-                <div class="am-fr tpl-header-navbar">
-                    <ul>
-                        <!-- 欢迎语 -->
-                        <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="/admin/setuser">欢迎你, <span>{{$rs->username}}</span> </a>
-                        </li>
+            </span>
+        </div>
+        <!-- 搜索 -->
 
-                        <!-- 新邮件 -->
-                        <li class="am-dropdown tpl-dropdown" data-am-dropdown>
-                            <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
-                                <i class="am-icon-envelope"></i>
-                                <span class="am-badge am-badge-success am-round item-feed-badge">4</span>
-                            </a>
-                            <!-- 弹出列表 -->
-                            <ul class="am-dropdown-content tpl-dropdown-content">
-                                <li class="tpl-dropdown-menu-messages">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
-                                        <div class="menu-messages-ico">
-                                            <img src="/assets/img/user04.png" alt="">
-                                        </div>
-                                        <div class="menu-messages-time">
-                                            3小时前
-                                        </div>
-                                        <div class="menu-messages-content">
-                                            <div class="menu-messages-content-title">
-                                                <i class="am-icon-circle-o am-text-success"></i>
-                                                <span>夕风色</span>
-                                            </div>
-                                            <div class="am-text-truncate"> Amaze UI 的诞生，依托于 GitHub 及其他技术社区上一些优秀的资源；Amaze UI 的成长，则离不开用户的支持。 </div>
-                                            <div class="menu-messages-content-time">2016-09-21 下午 16:40</div>
-                                        </div>
-                                    </a>
-                                </li>
+        <div class="am-fl tpl-header-switch-button" style="margin-left: -8px;">
+           <a style=""  href="javascript:;" id="all_back" class='kuaijie am-icon-arrow-left'><span></span></a>
+        </div>
+        <div class="am-fl tpl-header-switch-button" style="margin-left: -8px;">
+           <a style=""  href="/admin/stuuser"  class='am-icon-bookmark kuaijie'><span> 学生管理</span></a>
+        </div>
+        <div class="am-fl tpl-header-switch-button" style="margin-left: -8px;">
+           <a href="/admin/tea_sclass"  class='am-icon-bookmark kuaijie'><span> 口语空课表</span></a>
+        </div>
+        <div class="am-fl tpl-header-switch-button" style="margin-left: -8px;">
+           <a href="/admin/stu_wcorrect/create"  class='am-icon-bookmark kuaijie'><span> 作文预约表</span></a>
+        </div>
+        <!-- 其它功能-->
+        <div class="am-fr tpl-header-navbar">
+            <ul>
+                <!-- 欢迎语 -->
+                <li class="am-text-sm tpl-header-navbar-welcome">
+                    <a href="/admin/setuser">欢迎你, <span>{{$rs->username}}</span> </a>
+                </li>
 
-                                <li class="tpl-dropdown-menu-messages">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
-                                        <div class="menu-messages-ico">
-                                            <img src="/assets/img/user02.png" alt="">
-                                        </div>
-                                        <div class="menu-messages-time">
-                                            5天前
-                                        </div>
-                                        <div class="menu-messages-content">
-                                            <div class="menu-messages-content-title">
-                                                <i class="am-icon-circle-o am-text-warning"></i>
-                                                <span>禁言小张</span>
-                                            </div>
-                                            <div class="am-text-truncate"> 为了能最准确的传达所描述的问题， 建议你在反馈时附上演示，方便我们理解。 </div>
-                                            <div class="menu-messages-content-time">2016-09-16 上午 09:23</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="tpl-dropdown-menu-messages">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
-                                        <i class="am-icon-circle-o"></i> 进入列表…
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                <!-- 新邮件 -->
+                <li class="am-dropdown tpl-dropdown" data-am-dropdown>
+                    <a href="/admin/message" >
+                        <i class="am-icon-envelope"></i>
+                        <span class="am-badge am-badge-success am-round item-feed-badge" id="changenum">0</span>
+                    </a>
+                </li>
 
-                        
+                
 
-                        <!-- 退出 -->
-                        <li class="am-text-sm">
-                            <a href="/admin/loginout">
-                                <span class="am-icon-sign-out"></span> 退出
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                <!-- 退出 -->
+                <li class="am-text-sm">
+                    <a href="/admin/loginout">
+                        <span class="am-icon-sign-out"></span> 退出
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $('#all_back').click(function(){
+            window.history.back(-1);
+        });
+    //建立一个socket链接
+      var socket = io.connect('http://dt.diantingedu.com:3389/');
+        //往服务器发送消息
+        socket.emit('howmany', { num: $('#changenum').html()});
+        //监听服务端发送的消息 news参数与服务端emit第一个参数相同
+        socket.on('new_num', function (data) {
+            console.log(data);
+            $('#changenum').html(data.new_num.length);
+            socket.emit('howmany', { num: $('#changenum').html()});
+        });
+    </script>
 
-        </header>
+</header>

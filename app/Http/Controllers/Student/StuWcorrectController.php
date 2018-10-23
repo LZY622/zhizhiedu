@@ -325,8 +325,9 @@ class StuWcorrectController extends Controller
             // 判断时间(18点钱可以取消)
             $date = strtotime(date('Y-m-d',$class->classtime));
             if((time() - $date + 18*3600) >=0){
+                DB::table('msm')->insert(['uid'=>$class->uid,'message'=>2,'others'=>'wcorrect|'.$id,'addtime'=>time()]);
                 $data['status'] = 0;
-                $data['con'] = '最迟当日晚18点前取消，谢谢您的配合';
+                $data['con'] = '最迟当日晚18点前取消，谢谢您的配合,逾时取消的申请已经发出，请等待助教联系您';
                 return response()->json($data);
             }
             $class->status = 3;

@@ -78,19 +78,28 @@
 	<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
         <div class="widget am-cf">
             <div class="widget-head am-cf">
-                <div class="widget-title  am-cf">助教用户管理</div>
+                <div class="widget-title  am-cf">@if($status)已处理@else未处理@endif消息管理</div>
             </div>
             <div class="widget-body  am-fr">
                 <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
                     <div class="am-form-group">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
-                                <a href="/admin/adminuser/create" class="am-btn am-btn-default am-btn-success">
+                            	@if(!$status)
+                                <a href="/admin/message?status=1" class="am-btn am-btn-default am-btn-success">
                                 	<!-- <button type="button" > -->
-	                                	<span class="am-icon-plus"></span> 
-	                                	新增
+	                                	<span class="am-icon-book"></span> 
+	                                	查看已处理
 	                                <!-- </button> -->
                                 </a>
+                                @else
+                                <a href="/admin/message?status=0" class="am-btn am-btn-default am-btn-success">
+                                	<!-- <button type="button" > -->
+	                                	<span class="am-icon-book"></span> 
+	                                	查看未处理
+	                                <!-- </button> -->
+                                </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -101,45 +110,47 @@
                     <table class="am-table am-table-compact am-table-striped tpl-table-black " width="100%">
                         <thead>
                             <tr>
-                                <th>头像</th>
-                                <th>用户名</th>
-                                <th>身份</th>
-                                <th>状态</th>
-                                <th>操作</th>
+                                <th>ID</th>
                                 <th>添加时间</th>
+                                <th>消息类型</th>
+                                <th>用户名</th>
+                                <th>内容</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                         	@foreach ($res as $k => $v)
                             <tr class="gradeX">
                                 <td>
-                                    <img src="{{$v->img}}" class="tpl-table-line-img" width="50px" alt="">
+                                    {{$v->id}}
                                 </td>
-                                <td class="am-text-middle">{{$v->username}}</td>
+                                <td class="am-text-middle">{{date('Y-m-d H:i',$v->addtime)}}</td>
                                 <td class="am-text-middle">
-                                	@foreach($role as $kr=>$vr)
-									@if($v->roles==$vr->id)
-									{{$vr->name}}
-									@endif
-                                	@endforeach
+                                	@if($v->message==1)重置密码
+                                	@elseif($v->message==2)申请取消作文
+                                	@endif
                                 </td>
                                 <td class="am-text-middle">
-                                	@if($v->status == 1)启用 @else 禁用 @endif
+                                	{{$user[$v->uid]}}
+                                </td>
+                                <td class="am-text-middle">
+                                	@if($v->others)
+									申请取消{{date('Y年m月d日',$class[$v->id]->classtime)}}{{$tea[$class[$v->id]->tid]}}的作文
+                                	@endif
                                 </td>
                                 <td class="am-text-middle">
                                     <div class="tpl-table-black-operation">
-                                        <a href="/admin/adminuser/{{$v->id}}">
-                                            <i class="am-icon-pencil"></i> 编辑
+                                        <a href="/admin/message/{{$v->id}}">
+                                            <i class="am-icon-pencil"></i>
+											@if($status)
+                                            标记未处理
+                                            @else
+                                            标记已处理
+                                            @endif
                                         </a>
-                                        <form action="/admin/adminuser/{{$v->id}}" method="post"style="display: inline">
-				                    		{{csrf_field()}}
-				                    		{{method_field('delete')}}
-				                    		<button class="delete-button"><i class="am-icon-trash" type="submit"></i> 删除</button>
-				                    	</form>
-                                        
                                     </div>
                                 </td>
-                                <td class="am-text-middle">{{date('Y-m-d H:i',$v->addtime)}}</td>
+                                
                             </tr>
                             @endforeach
                             <!-- more data -->
@@ -149,11 +160,6 @@
             </div>
         </div>
     </div>
-    <div class="am-u-lg-12 am-cf">
-	    <div class="am-fr">
-	    	{!! $res->links() !!}
-	    </div>
-	</div>
     
 @endsection
 @section('js')
@@ -161,7 +167,6 @@
 
     $('.alert-success').delay(2000).fadeOut(1000);
     $('.alert-warning').delay(2000).fadeOut(1000);
-    $('#pagenum ul').addClass("am-pagination tpl-pagination");
     
 </script>
 

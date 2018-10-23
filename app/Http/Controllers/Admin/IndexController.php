@@ -15,6 +15,48 @@ use Hash;
 class IndexController extends Controller
 {
     /**
+     *  展示消息页面
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function message(Request $request)
+    {
+        $status = $request->status?$request->status:0;
+        $rs = session('user');
+        // DB::table('msm')->where('status',0)->update(['status',1]);
+        $res = DB::table('msm')->where('status',$status)->get();
+        $user = DB::table('stu_users')->pluck('phone','id');
+        $tea = DB::table('tea_users')->where('cate',13)->orWhere('cate',15)->pluck('username','id');
+        $class = [];
+        foreach ($res as $key => $value) {
+            if ($value->others) {
+                $arr = explode('|', $value->others);
+                $class[$value->id] = DB::table('stu_'.$arr[0])->where('cid',$arr[1])->first();
+            }
+        }
+        // dd($class);
+        return view('admin.message',compact(['rs','res','user','class','tea','status']));
+    }
+    /**
+     *  标记已读
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+     public function messageid($id)
+    {
+        try{
+            $msm = DB::table('msm')->where('id',$id)->first();
+            if ($msm->status) {
+                DB::table('msm')->where('id',$id)->update(['status'=>0]);
+            }else{
+                DB::table('msm')->where('id',$id)->update(['status'=>1]);
+            }
+            return back()->with('success','标记成功');
+        }catch(\Exception $e){
+            return back()->with('errors','标记失败');
+        }
+    }
+    /**
      *  展示后台主页
      * 	@param 
      *  @return 
@@ -23,6 +65,37 @@ class IndexController extends Controller
     {
         $rs = session('user');
     	return view('admin.index',compact(['rs']));
+    }
+    /**
+     *  ajax得到折现数据
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function zhexian()
+    {
+        $data = [];
+        try{
+            $data['kouyu'] = [];
+            $data['mokao'] = [];
+            $data['task1'] = [];
+            $data['task2'] = [];
+            $data['Xzhou'] = [];
+            $yesterday = strtotime('yesterday');
+            for ($i=14; $i >= 0; $i--) { 
+                $a = $yesterday-$i*24*3600;
+                $b = $a+24*3600;
+                $data['Xzhou'][] = date('Y-m-d',$a);
+                $data['kouyu'][] = DB::table('classnum_add')->where('cateid','4')->where('addtime','>=',$a)->where('addtime','<',$b)->sum('num');
+                $data['mokao'][] = DB::table('classnum_add')->where('cateid','5')->where('addtime','>=',$a)->where('addtime','<',$b)->sum('num');
+                $data['task1'][] = DB::table('classnum_add')->where('cateid','13')->where('addtime','>=',$a)->where('addtime','<',$b)->sum('num');
+                $data['task2'][] = DB::table('classnum_add')->where('cateid','15')->where('addtime','>=',$a)->where('addtime','<',$b)->sum('num');
+            }
+            $data['status'] = 1;
+        }catch(\Exception $e){
+            $data['status'] = 0;
+        }
+        return response()->json($data);
+        
     }
 
     /**

@@ -25,7 +25,7 @@ class SignupRequest extends FormRequest
     public function rules()
     {
         return [
-           'username' => 'required|regex:/^\w{3,12}$/',
+           'username' => 'required|regex:/^\w{6,12}$/',
             'password' => 'required|regex:/^\S{6,12}$/',
             'repass' =>'same:password',
         ];

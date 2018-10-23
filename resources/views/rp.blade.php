@@ -257,7 +257,7 @@
 
     $('.alert-success').delay(2000).fadeOut(1000);
     $('.alert-warning').delay(2000).fadeOut(1000);
-    $('.am-fr ul').addClass("am-pagination tpl-pagination");
+    $('#pagenum ul').addClass("am-pagination tpl-pagination");
     // 判断是否填入角色名
     $('input[name=name]').change(function(){
     	if ($(this).val()) {

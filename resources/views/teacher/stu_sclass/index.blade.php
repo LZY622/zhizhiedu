@@ -207,7 +207,7 @@
         </div>
     </div>
     <div class="am-u-lg-12 am-cf">
-	    <div class="am-fr">
+	    <div class="am-fr" id="pagenum">
 	    	{!! $res->appends($request->all())->links() !!}
 	    </div>
 	</div>
@@ -292,7 +292,7 @@
 
     $('.alert-success').delay(2000).fadeOut(1000);
     $('.alert-warning').delay(2000).fadeOut(1000);
-    $('.am-fr ul').addClass("am-pagination tpl-pagination");
+    $('#pagenum ul').addClass("am-pagination tpl-pagination");
    	
    	$('button[data-target=".bs-modal-lg"]').click(function(){
    		$('input[name=taobaoID_u]').val($(this).attr('taobaoID'));

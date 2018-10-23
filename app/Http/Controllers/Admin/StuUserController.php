@@ -327,6 +327,7 @@ class StuUserController extends Controller
             $jname = $request->input('jname');
             if(!empty($username)){
                 $uid = Stuuser_message::where('qq',$username)->orWhere('mname',$username)->orWhere('taobaoID',$username)->pluck('uid');
+                // $uid = [];
                 // dd($uid);
                 $id = Stuuser::where('phone',$username)->value('id');
                 if ($id) {

@@ -31,6 +31,7 @@ class TeaClassSeeder extends Seeder
 				$date = rand(4,7);
 				for ($i=0; $i < $date; $i++) { 
 					$num = rand(6,15);
+                    DB::table('tea_wcorrect')->where('tid',$value->id)->where('classtime',strtotime(date('Y-m-d',time()))+($i*24*3600))->delete();
 					DB::table('tea_wcorrect')->insert([
 						'tid'=>$value->id,
 						'classtime'=>strtotime(date('Y-m-d',time()))+($i*24*3600),

@@ -8,21 +8,114 @@ use App\Http\Requests\Teacher\SignupRequest;
 use App\Http\Requests\Teacher\SetuserRequest;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use App\Model\Teauser;
+use App\Model\StuSclass;
+use App\Model\StuWcorrect;
 use \DB;
 use Hash;
 
 
 class IndexController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('teacher_hasrole')->only('index');
+    }
     /**
      *  展示主页
      * 	@param 
      *  @return 
      */
-    public function index()
+    public function index(Request $request)
     {
         $rs = session('user');
-    	return view('teacher.index',compact(['rs']));
+        // dd($rs->id);
+        // dd();
+        if ($rs->cate == 2) {
+            $a = DB::table('tea_sclass')->where('classdate','>',strtotime(date('Y-m-d',time())))->where('status',0)->where('tid',$rs->id)->count();
+            $b = DB::table('stu_sclass')->where('tid',$rs->id)->where('classtime','>=',time())->where('classtime','<',strtotime('tomorrow'))->where('status',1)->count();
+            $c = DB::table('stu_sclass')->where('tid',$rs->id)->where('classtime','<',time())->where('status',1)->count();
+            $d = 0;
+            $e = 70.00;
+        }else{
+            // dd(strtotime('today'));
+            $a = DB::table('tea_wcorrect')->where('tid',$rs->id)->where('classtime','>',strtotime('today'))->sum('num');
+            $b = DB::table('stu_wcorrect')->where('tid',$rs->id)->where('classtime','<',strtotime('today'))->where('status',2)->count();
+            $c = DB::table('stu_wcorrect')->where('tid',$rs->id)->where('classtime',strtotime('today'))->where('status',1)->count();
+            $d = 0;
+        }
+        // 老师工资表
+        if ($rs->cate == 2) {
+            $res = [];
+            $price = ['0'=>'STPRICE','4'=>'SPEAKPRICE','5'=>'MOCKPRICE'];
+            $today = date('Y-m-d',time());
+            $month = date('Y-m-d',time()-24*3600*14);
+            $range = $request->input('range')?$request->input('range'):$month.' - '.$today;
+            $range_arr = explode(' - ', $range);
+            $start = strtotime($range_arr[0]);
+            $end = strtotime($range_arr[1]);
+            $tid = $rs->id;
+            $status = [2,4,5,6,7];
+            $cateid = ['0'=>'st','4'=>'cla','5'=>'mt'];
+            $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
+            // 筛选课表中的信息
+            foreach ($cateid as $key => $value) {
+                foreach ($status as $k => $v) {
+                    $res[$value][$v] = StuSclass::where(function($query) use($request,$tid){
+                        if($tid != 0){
+                            $query->where('tid',$tid);
+                        }
+                    })
+                    ->where('classtime','>=',$start)
+                    ->where('classtime','<=',$end+(24*3600-1))
+                    ->where('cateid',$key)
+                    ->where('status',$v)->groupBy('tid')->select('tid',DB::raw('count(*) as total'))
+                    ->get();
+                }
+            }
+            $tea_id = StuSclass::where(function($query) use($request,$tid){
+                    if($tid != 0){
+                        $query->where('tid',$tid);
+                    }
+                })
+                ->where('classtime','>=',$start)
+                ->where('classtime','<=',$end+(24*3600-1))
+                ->where('status','!=','1')
+                ->where('status','!=','3')
+                ->groupBy('tid')->select('tid',DB::raw('count(*) as total'))
+                ->get();
+        }else{
+            $price = ['13'=>'TASK2PRICE','15'=>'TASK1PRICE'];
+            $today = date('Y-m-d',time());
+            $month = date('Y-m-d',time()-24*3600*14);
+            //设置区间默认范围查询
+            $range = $request->input('range')?$request->input('range'):$month.' - '.$today;
+            $range_arr = explode(' - ', $range);
+            $start = strtotime($range_arr[0]);
+            $end = strtotime($range_arr[1]);
+            // dd($end);
+            // 设置默认的下拉框信息
+            $cateid = $rs->cate;
+            $tid = $rs->id;
+            // dd($cateid);
+            // 找到老师信息
+            $tea = Teauser::where('cate',13)->orWhere('cate',15)->pluck('username','id');
+            $tea_cate = Teauser::where('cate',13)->orWhere('cate',15)->pluck('cate','id');
+            $tea_id = Teauser::where('cate',$cateid)->pluck('id');
+            // 筛选课表中的信息
+            $res = StuWcorrect::where(function($query) use($request,$tid){
+                if($tid != 0){
+                    $query->where('tid',$tid);
+                }
+            })
+            ->where('classtime','>=',$start)
+            ->where('classtime','<=',$end)
+            ->whereIn('tid',$tea_id)
+            ->where('status',5)->groupBy('tid')->select('tid',DB::raw('count(*) as total'))
+            ->get();
+        }
+        // dd($tea_id);
+    	return view('teacher.index',compact(['rs','a','b','c','d','e','request','res','tea','tea_id','range','tid','price','tea_cate','cateid']));
     }
 
     /**

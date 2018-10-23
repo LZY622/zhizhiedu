@@ -17,3 +17,32 @@
     @include('public.admin.css')
     @include('public.admin.js')
 </head>
+<script language="JavaScript">
+ step=0
+ function flash_title(n)
+ {
+    step++;
+    m = $('#changenum').html();
+    if (n != m) {
+        step = 4;
+    }
+    if (step==3) {step=1}        
+    if (step==1) {document.title='【你有'+n+'条未处理消息】'}
+    if (step==2) {document.title='【　　　　　　】'}
+    if (step != 4) {setTimeout("flash_title("+n+")",380);}
+    if (step == 4) {
+        setTimeout("flash_title("+m+")",380);
+        step = 1;
+    }
+ }
+ $(function(){
+    setTimeout(function(){
+        n = $('#changenum').html();
+        if (n > 0) {
+            init = flash_title(n);
+        }
+
+    },5000);
+ })
+ // 
+</script>

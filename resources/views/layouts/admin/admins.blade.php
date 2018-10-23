@@ -8,10 +8,12 @@
         <div class="tpl-content-wrapper">
             <div class="container-fluid am-cf">
                 <div class="row">
-    	@section('content')
-    	@show
+            	@section('content')
+            	@show
                 </div>
             </div>
+            @section('chart')
+            @show
         </div>
    </div>
     </div>
