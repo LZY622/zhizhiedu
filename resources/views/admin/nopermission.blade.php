@@ -1,5 +1,5 @@
-@extends('layouts.teacher.admins')
-@section('title','吱吱英语老师端')
+@extends('layouts.admin.admins')
+@section('title','吱吱英语后台管理')
 @section('content')
 <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
     <div class="widget am-cf">

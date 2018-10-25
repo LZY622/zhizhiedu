@@ -11,6 +11,10 @@ use App\Model\UR;
 
 class RPController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin_hasrole')->only('index');
+    }
     /**
      * Display a listing of the resource.
      *

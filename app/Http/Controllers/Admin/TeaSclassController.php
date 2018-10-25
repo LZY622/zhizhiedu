@@ -35,13 +35,15 @@ class TeaSclassController extends Controller
         $tid = $request->input('tid')?$request->input('tid'):0;
         // 找到老师信息
         $tea = Teauser::where('cate',2)->where('status',1)->pluck('username','id');
-        $tea_qq = Teauser::where('cate',2)->pluck('qq','id');
+        // dd($tea);
+        $tea_qq = Teauser::where('cate',2)->where('status',1)->pluck('qq','id');
         // dd($tea);
         $res = TeaSclass::where(function($query) use($request,$tid){
             $time = $request->input('time');
             if($tid != 0){
                 $query->where('tid',$tid);
             }
+
             if($time != 0){
                 $time_range = strtotime('1970-01-01 '.$time);
                 $query->whereBetween('classtime',[$time_range-3600,$time_range+3600]);

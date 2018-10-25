@@ -36,13 +36,15 @@
     }
  }
  $(function(){
-    setTimeout(function(){
+    var init = setInterval(function(){
         n = $('#changenum').html();
+        // console.log(n);
         if (n > 0) {
+            clearInterval(init);
             init = flash_title(n);
         }
-
     },5000);
+    
  })
  // 
 </script>

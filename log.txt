@@ -169,3 +169,35 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </TemplateSMS>
 </Response>
 
+request body = <TemplateSMS>
+                    <to>15161165279</to>
+                    <appId>8aaf070866235bc50166694b74c62610</appId>
+                    <templateId>1</templateId>
+                    <datas><data>3995</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da8662360a40166693cd8ee1ddd/SMS/TemplateSMS?sig=B8E9F52AA1EFFDAB533786B3CD4FD4A6
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>000000</statusCode>
+    <TemplateSMS>
+        <smsMessageSid>9acef86e17f34ffc9c22c9edd98f6512</smsMessageSid>
+        <dateCreated>20181025120524</dateCreated>
+    </TemplateSMS>
+</Response>
+
+request body = <TemplateSMS>
+                    <to>15161165279</to>
+                    <appId>8aaf070866235bc50166694b74c62610</appId>
+                    <templateId>1</templateId>
+                    <datas><data>7932</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da8662360a40166693cd8ee1ddd/SMS/TemplateSMS?sig=0683038B8DAD17D7F280649BA705FD2C
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>000000</statusCode>
+    <TemplateSMS>
+        <smsMessageSid>f82ddbcf9adc475daf6327114bd16915</smsMessageSid>
+        <dateCreated>20181025120633</dateCreated>
+    </TemplateSMS>
+</Response>
+

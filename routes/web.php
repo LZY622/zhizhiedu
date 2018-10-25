@@ -14,6 +14,10 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// Route::get('/ceshi',function(){
+//     $data = ['status'=>1,'data'=>'liziyue'];
+//     return response()->json($data);
+// });
 Route::get('/','Student\IndexController@index');
 // 后台路由
 Route::get('/admin/login','Admin\IndexController@login');
@@ -22,6 +26,8 @@ Route::post('/admin/signup','Admin\IndexController@do_signup');
 Route::get('/admin/code','Admin\IndexController@pic_code');
 Route::post('/admin/do_login','Admin\IndexController@do_login');
 Route::get('/admin/loginout','Admin\IndexController@loginout');
+// 无权限页面路由(权限中间件名字‘admin_hasrole’)
+Route::get('/admin/nopermission','Admin\IndexController@nopermission');
 Route::group(['middleware'=>['admin_login'],'namespace'=>'Admin','prefix'=>'admin'],function(){
     Route::get('/','IndexController@index');
     Route::get('/message','IndexController@message');

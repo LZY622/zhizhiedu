@@ -43,6 +43,7 @@
                         <small></small>
                     </div>
                 </div>
+                @if($res->cate != 2 && $res->cate != 13 && $res->cate != 15)
                 <div class="am-form-group">
                     <label for="user-phone" class="am-u-sm-3 am-form-label">
                         所属课程类别 
@@ -58,6 +59,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
                 <div class="am-form-group">
                     <label for="user-phone" class="am-u-sm-3 am-form-label">
                         身份 

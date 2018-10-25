@@ -40,8 +40,8 @@ class SignupRequest extends FormRequest
         return [
             'phone.required'=>'用户名不能为空',
             'password.required'=>'密码不能为空',
-            'phone.regex'=>'用户名格式不正确',
-            'password.regex'=>'密码格式不正确',
+            'phone.regex'=>'用户名格式不正确，必须为6-12位数字字母下划线',
+            'password.regex'=>'密码格式不正确，长度必须为6-12位',
             'repass.same'=>'两次密码不一致',
         ];
     }

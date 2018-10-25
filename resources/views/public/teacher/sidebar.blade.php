@@ -33,26 +33,26 @@
                 <li class="sidebar-nav-heading"> <span class="sidebar-nav-heading-info">课程管理</span></li>
                 <li class="sidebar-nav-link">
                     <a href="/teacher/stu_sclass/create">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-clock-o sidebar-nav-link-logo"></i> 
                         查看口语课程预约列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/teacher/tea_sclass/{{session('user')->id}}/edit">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-lock sidebar-nav-link-logo"></i> 
                         口语课程开关
                     </a>
                 </li>
                 
                 <li class="sidebar-nav-link">
                     <a href="/teacher/stu_wcorrect/create">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-clock-o sidebar-nav-link-logo"></i> 
                         查看作文批改预约列表
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="/teacher/tea_wcorrect/{{session('user')->id}}">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 
+                        <i class="am-icon-lock sidebar-nav-link-logo"></i> 
                         篇数开放
                     </a>
                 </li>

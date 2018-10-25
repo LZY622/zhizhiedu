@@ -1,5 +1,5 @@
 @extends('layouts.teacher.admins')
-@section('title','吱吱英语后台管理')
+@section('title','吱吱英语老师端')
 @section('content')
 
 <link rel="stylesheet" href="/assets/css/fullcalendar.min.css" />

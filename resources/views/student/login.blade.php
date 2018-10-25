@@ -71,7 +71,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                             <h6><a href="/signup" style="color: red;">立即注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color: red;" id="model">忘记密码</a></h6>
                             <div class="right-w3l">
                                 <input type="submit" value="登录">
-                                <a href="/youke"><button type="button" style="height:30px">游客模式登录</button></a>
+                                <a href="/youke"><button type="button" style="background-color: #e7e7e7; color: black;height: 41px">游客模式登录</button></a>
                             </div>
                         </div>
                     </form>

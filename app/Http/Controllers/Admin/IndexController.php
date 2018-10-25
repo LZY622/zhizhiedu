@@ -293,4 +293,15 @@ class IndexController extends Controller
         header("Content-Type:image/jpeg");
         $builder->output();
     }
+    /**
+     *  展示无权限访问页面
+     *     @param 
+     *  @return \Illuminate\Http\Response
+     */
+    public function nopermission()
+    {
+        $rs = session('user');
+        $errors = '请您点击左侧菜单切换至其他页面';
+        return view('admin.nopermission',compact(['rs','errors']));
+    }
 }
